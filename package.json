@@ -2,9 +2,11 @@
   "//1": "describes your app and its dependencies",
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
-  "name": "starter-react-router",
+  "name": "expressjs-authorization-request",
+  "private": true,
+  "author": "mrtillman",
   "version": "0.0.1",
-  "description": "Get started using React Router for client-side routing",
+  "description": "demonstrates how to send an oauth 2.0 authorization request",
   "main": "server.js",
   "scripts": {
     "build": "webpack",
@@ -33,5 +35,8 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "set-value": ">=2.0.1"
+  }
 }
