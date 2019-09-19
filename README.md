@@ -32,4 +32,5 @@ npm start
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser. You can sign in using one of the [demo accounts](https://github.com/mrtillman/counter-culture.secure/blob/master/README.md#usage).
 
 ## License
-[MIT](https://github.com/mrtillman/counter-culture.app/blob/master/LICENSE.md)
+
+[MIT](https://github.com/mrtillman/expressjs-authorization-request/blob/master/LICENSE)
