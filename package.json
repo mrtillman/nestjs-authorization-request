@@ -13,16 +13,16 @@
     "start": "webpack && node server.js"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
     "express": "^4.16.3",
+    "isomorphic-unfetch": "^3.0.0",
     "jsx-loader": "^0.13.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "webpack": "^4.1.1",
     "react-router-dom": "^4.2.2",
-    "webpack-cli": "^3.1.2",
     "uuid": "^3.3.3",
-    "dotenv": "^8.1.0",
-    "request": "^2.88.0"
+    "webpack": "^4.1.1",
+    "webpack-cli": "^3.1.2"
   },
   "engines": {
     "node": "8.x"
