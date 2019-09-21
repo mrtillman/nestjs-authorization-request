@@ -17,7 +17,7 @@ const getAuthUrl = () => {
   authorizationUrl = authorizationUrl.concat([
     "response_type=" + response_type,
     "client_id=" + client_id,
-    "redirect_uri=" + redirect_uri,
+    "redirect_uri=" + encodeURIComponent(redirect_uri),
     "scope=openid",
     "state=" + _state
   ].join("&"));
