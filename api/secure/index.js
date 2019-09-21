@@ -23,7 +23,7 @@ const getAuthUrl = () => {
   return authorizationUrl;
 };
 
-const getToken = (code) =>{
+const getToken = async (code) => {
   return new Promise((resolve, reject) => {
     const url = `${baseUrl}/connect/token`;
     var form = {
