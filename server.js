@@ -9,6 +9,9 @@ const response_type = "code";
 const baseUrl = process.env.NODE_ENV == 'production'
                 ? "https://secure.counter-culture.io"
                 : "http://counter-culture:5000";
+const apiBaseUrl = process.env.NODE_ENV == 'production'
+                ? "https://api.counter-culture.io"
+                : "http://counter-culture:4000";
 
 const state = makeGuid();
 
@@ -21,6 +24,7 @@ var app = express();
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+// 1. Begin Authorization Request
 app.get("/sign-in", function(req,res){
     authorizationUrl = authorizationUrl.concat([
       "response_type=" + response_type,
@@ -32,10 +36,19 @@ app.get("/sign-in", function(req,res){
     res.redirect(authorizationUrl);
 })
 
+// 2. & 3. Authorization Grant
 app.get("/oauth2/callback", function(req, res) {
   const authorization_code = req.query.code;
+  
+  // 4. & 5. Access Token
   getToken(authorization_code).then(token => {
-    res.end(token);
+    
+    // 6. Protected Resource
+    getCounters(token)
+      .then(counters => res.end(counters))
+      .catch(err => {
+        res.end(err);
+      });
   });
 })
 
@@ -60,12 +73,25 @@ function getToken(code){
   })
 }
 
-// http://expressjs.com/en/starter/basic-routing.html
+function getCounters(token){
+  var options = {
+    url: `${apiBaseUrl}/v1/counters`,
+    headers: {
+      authorization: `bearer ${token}`
+    }
+  };
+  return new Promise((resolve, reject) => {
+    request.get(options, (e, r, body) => {
+      if(e) reject(e);
+      resolve(body);
+    });
+  })
+}
+
 app.get("*", function(request, response) {
   response.sendFile(__dirname + '/app/index.html');
 });
 
-// listen for requests :)
 var listener = app.listen(process.env.PORT || 8080, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Magic is happening on port ' + listener.address().port);
 });
