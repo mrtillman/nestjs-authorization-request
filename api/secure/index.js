@@ -8,7 +8,8 @@ const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
 const response_type = "code";
-const state = makeGuid();
+
+const _state = makeGuid();
 
 let authorizationUrl = baseUrl + "/connect/authorize?";
 
@@ -18,13 +19,16 @@ const getAuthUrl = () => {
     "client_id=" + client_id,
     "redirect_uri=" + redirect_uri,
     "scope=openid",
-    "state=" + state
+    "state=" + _state
   ].join("&"));
   return authorizationUrl;
 };
 
-const getToken = async (code) => {
+const getToken = async (code, state) => {
   return new Promise((resolve, reject) => {
+    if(_state != state) {
+      reject('Forged Authorization Request');
+    }
     const url = `${baseUrl}/connect/token`;
     var form = {
       code,
@@ -59,5 +63,5 @@ module.exports = {
   getToken,
   get authorizationUrl() {
     return getAuthUrl();
-  }
+  },
 };
