@@ -52,7 +52,7 @@ const getToken = async (code, state) => {
       return data.access_token;
     }
     
-    return reject(res.statusText);
+    throw res.statusText;
 }
 
 module.exports = {

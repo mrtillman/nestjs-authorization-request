@@ -17,7 +17,7 @@ const getCounters = async () => {
     return counters;
   }
   
-  return reject(res.statusText);
+  throw res.statusText;
 }
 
 module.exports = {
