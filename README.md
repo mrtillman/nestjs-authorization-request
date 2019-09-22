@@ -6,7 +6,7 @@ Demonstrates [How to Send an Authorization Request](https://github.com/mrtillman
 
 # Prerequisites
 
-When in development mode, be sure to start [counter-culture.api](https://github.com/mrtillman/counter-culture.api) and [counter-culture.secure](https://github.com/mrtillman/counter-culture.secure) on ports `4000` and `5000`, respectively. Also, remember to [register](http://localhost:9000/register) your app locally.
+When in development mode, be sure to start [counter-culture.api](https://github.com/mrtillman/counter-culture.api) and [counter-culture.secure](https://github.com/mrtillman/counter-culture.secure) on ports `4000` and `5000`, respectively. Also, remember to [register](http://localhost:9000/register) your app locally via [counter-culture.dev](https://github.com/mrtillman/counter-culture.dev).
 
 Next, find `.demo.env` in the project root, rename it to `.env`, and set your environment variables:
 
