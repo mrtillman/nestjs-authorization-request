@@ -5,22 +5,19 @@ const baseUrl = process.env.NODE_ENV == 'production'
 
 let _token = '';
 
-const getCounters = () => {
-  const url = `${baseUrl}/v1/counters`
-  return new Promise((resolve, reject) => {
-    fetch(url, {
-      headers: {
-        'authorization': `bearer ${_token}`,
-      },
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      reject(res.statusText);
-    }).then(res => {
-      resolve(res);
-    }).catch(reject);
+const getCounters = async () => {
+  const res = await fetch(`${baseUrl}/v1/counters`, {
+    headers: {
+      'authorization': `bearer ${_token}`,
+    },
   })
+
+  if (res.ok) {
+    const counters = await res.json();
+    return counters;
+  }
+  
+  return reject(res.statusText);
 }
 
 module.exports = {
