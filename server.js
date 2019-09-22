@@ -3,12 +3,7 @@ const express = require('express');
 const app = express();
 const secureApi = require('./api/secure');
 const coreApi = require('./api/core');
-
-const handleError = (promise) => {
-  return promise
-    .then(data => ([data, null]))
-    .catch(error => Promise.resolve([null, error]));
-}
+const { handleError } = require('./utils');
 
 app.use(express.static('public'));
 
