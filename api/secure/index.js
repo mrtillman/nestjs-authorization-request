@@ -25,39 +25,34 @@ const getAuthUrl = () => {
   return authUrl.concat('?', parameters);
 };
 
-const getToken = (code, state) => {
-  return new Promise((resolve, reject) => {
+const getToken = async (code, state) => {
+
     if(_state != state) {
-      reject('Forged Authorization Request');
+      throw 'Forged Authorization Request';
     }
-    const url = `${baseUrl}/connect/token`;
-    var form = {
-      code,
-      redirect_uri,
-      client_id,
-      client_secret,
-      scope: 'openid',
-      grant_type: 'authorization_code',
-    };
-    var formEncoded = Object.keys(form)
-                            .map(key => `${key}=${form[key]}`)
-                            .join('&');
-    fetch(url, {
+
+    const res = await fetch(`${baseUrl}/connect/token`, {
       method: "POST",
       headers: {
         "content-type": "application/x-www-form-urlencoded",
         'accept': 'application/json'
       },
-      body: formEncoded,
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      reject(res.statusText);
-    }).then(res => {
-      resolve(res.access_token);
-    }).catch(reject);
-  })
+      body: querystring.stringify({
+        code,
+        redirect_uri,
+        client_id,
+        client_secret,
+        scope: 'openid',
+        grant_type: 'authorization_code',
+      }),
+    });
+    
+    if (res.ok) {
+      const data = await res.json();
+      return data.access_token;
+    }
+    
+    return reject(res.statusText);
 }
 
 module.exports = {
