@@ -8,23 +8,24 @@ const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
 const response_type = "code";
+const querystring = require('querystring');
 
-const _state = makeGuid();
-
-let authorizationUrl = baseUrl + "/connect/authorize?";
+let _state = '';
 
 const getAuthUrl = () => {
-  authorizationUrl = authorizationUrl.concat([
-    "response_type=" + response_type,
-    "client_id=" + client_id,
-    "redirect_uri=" + encodeURIComponent(redirect_uri),
-    "scope=openid",
-    "state=" + _state
-  ].join("&"));
-  return authorizationUrl;
+  let authUrl = `${baseUrl}/connect/authorize`;
+  _state = makeGuid();
+  const parameters = querystring.stringify({
+    response_type,
+    client_id,
+    redirect_uri,
+    scope: 'openid',
+    state: _state
+  });
+  return authUrl.concat('?', parameters);
 };
 
-const getToken = async (code, state) => {
+const getToken = (code, state) => {
   return new Promise((resolve, reject) => {
     if(_state != state) {
       reject('Forged Authorization Request');
