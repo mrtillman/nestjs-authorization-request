@@ -1,12 +1,10 @@
 const fetch = require('isomorphic-unfetch');
-const baseUrl = process.env.NODE_ENV == 'production'
-                ? "https://api.counter-culture.io"
-                : "http://counter-culture:4000";
+const { API } = require('../servers');
 
 let _token = '';
 
 const getCounters = async () => {
-  const res = await fetch(`${baseUrl}/v1/counters`, {
+  const res = await fetch(`${API}/v1/counters`, {
     headers: {
       'authorization': `bearer ${_token}`,
     },

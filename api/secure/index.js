@@ -1,8 +1,6 @@
 const fetch = require('isomorphic-unfetch');
 const makeGuid = require('uuid/v1');
-const baseUrl = process.env.NODE_ENV == 'production'
-                ? "https://secure.counter-culture.io"
-                : "http://counter-culture:5000";
+const { SECURE } = require('../servers');
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
@@ -13,7 +11,7 @@ const querystring = require('querystring');
 let _state = '';
 
 const getAuthUrl = () => {
-  let authUrl = `${baseUrl}/connect/authorize`;
+  let authUrl = `${SECURE}/connect/authorize`;
   _state = makeGuid();
   const parameters = querystring.stringify({
     response_type,
@@ -31,7 +29,7 @@ const getToken = async (code, state) => {
       throw 'Forged Authorization Request';
     }
 
-    const res = await fetch(`${baseUrl}/connect/token`, {
+    const res = await fetch(`${SECURE}/connect/token`, {
       method: "POST",
       headers: {
         "content-type": "application/x-www-form-urlencoded",
