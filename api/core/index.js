@@ -5,7 +5,7 @@ const baseUrl = process.env.NODE_ENV == 'production'
 
 let _token = '';
 
-const getCounters = async () => {
+const getCounters = () => {
   const url = `${baseUrl}/v1/counters`
   return new Promise((resolve, reject) => {
     fetch(url, {

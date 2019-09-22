@@ -4,6 +4,12 @@ const app = express();
 const secureApi = require('./api/secure');
 const coreApi = require('./api/core');
 
+const handleError = (promise) => {
+  return promise
+    .then(data => ([data, null]))
+    .catch(error => Promise.resolve([null, error]));
+}
+
 app.use(express.static('public'));
 
 // 1. Begin Authorization Request
@@ -14,24 +20,23 @@ app.get("/sign-in", function(req,res){
 // 2. & 3. Authorization Grant
 app.get("/oauth2/callback", async function(req, res) {
 
-  const authorization_code = req.query.code;
-  const state = req.query.state;
-
-  const handleError = err => {
-    res.status(400).end(err);
-  }
+  const { code, state } = req.query;
 
   // 4. & 5. Access Token
-  const token = await secureApi.getToken(authorization_code, state)
-                               .catch(handleError);
-  
-  if(!token) return;
+  const [token, tokenErr] = await handleError(secureApi.getToken(code, state));
+
+  if(tokenErr) {
+    return res.status(400).json(tokenErr);
+  };
 
   coreApi.token = token;
   
   // 6. Protected Resource
-  const counters = await coreApi.getCounters()
-                                .catch(handleError);
+  const [counters, countersErr] = await handleError(coreApi.getCounters());
+
+  if(countersErr) {
+    return res.status(400).end(countersErr);
+  };
 
   res.json(counters);
 
