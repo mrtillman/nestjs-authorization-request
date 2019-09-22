@@ -13,8 +13,7 @@ const getCounters = async () => {
   })
 
   if (res.ok) {
-    const counters = await res.json();
-    return counters;
+    return await res.json();
   }
   
   throw res.statusText;
