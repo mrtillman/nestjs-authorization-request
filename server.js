@@ -21,7 +21,7 @@ app.get("/oauth2/callback", async function(req, res) {
   const [token, tokenErr] = await handleError(secureApi.getToken(code, state));
 
   if(tokenErr) {
-    return res.status(400).json(tokenErr);
+    return res.status(400).end(tokenErr.message);
   };
 
   coreApi.token = token;
@@ -30,7 +30,7 @@ app.get("/oauth2/callback", async function(req, res) {
   const [counters, countersErr] = await handleError(coreApi.getCounters());
 
   if(countersErr) {
-    return res.status(400).end(countersErr);
+    return res.status(400).end(countersErr.message);
   };
 
   res.json(counters);

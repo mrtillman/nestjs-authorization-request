@@ -26,7 +26,7 @@ const getAuthUrl = () => {
 const getToken = async (code, state) => {
 
     if(_state != state) {
-      throw 'Forged Authorization Request';
+      throw new Error('Forged Authorization Request');
     }
 
     const res = await fetch(`${SECURE}/connect/token`, {
@@ -50,7 +50,7 @@ const getToken = async (code, state) => {
       return data.access_token;
     }
     
-    throw res.statusText;
+    throw new Error(res.statusText);
 }
 
 module.exports = {

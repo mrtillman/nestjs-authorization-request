@@ -14,7 +14,7 @@ const getCounters = async () => {
     return await res.json();
   }
   
-  throw res.statusText;
+  throw new Error(res.statusText);
 }
 
 module.exports = {
