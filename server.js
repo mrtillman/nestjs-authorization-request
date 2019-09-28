@@ -12,27 +12,29 @@ app.get("/sign-in", function(req,res){
     res.redirect(secureApi.authorizationUrl);
 });
 
-// 2. & 3. Authorization Grant
+// 2. Authorization Grant
 app.get("/oauth2/callback", async function(req, res) {
 
+  // 3. Authorization Grant
   const { code, state } = req.query;
 
-  // 4. & 5. Access Token
+  // 4. Access Token
   const [token, tokenErr] = await handleError(secureApi.getToken(code, state));
 
   if(tokenErr) {
-    return res.status(400).end(tokenErr.message);
+    return res.status(401).end(tokenErr.message);
   };
 
+  // 5. Access Token
   coreApi.token = token;
   
-  // 6. Protected Resource
   const [counters, countersErr] = await handleError(coreApi.getCounters());
 
   if(countersErr) {
     return res.status(400).end(countersErr.message);
   };
-
+  
+  // 6. Protected Resource
   res.json(counters);
 
 })
