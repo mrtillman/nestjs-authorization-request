@@ -1,5 +1,7 @@
+const secureApi = require('./index');
+
 describe('Secure API', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
+  it('should get authorization url', () => {
+    expect(secureApi.authorizationUrl).toBeDefined();
   })
 })
