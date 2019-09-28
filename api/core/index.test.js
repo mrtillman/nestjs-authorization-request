@@ -1,29 +1,16 @@
 require('dotenv').config();
 const coreApi = require('./index');
-const nock = require('nock');
-const SERVERS = require('../servers');
+const stubs = require('./index.stubs');
+const mock = require('./index.mock');
 
-const fakeCounters = [
-  {
-    _id: 0,
-    name: 'phony',
-    value: 1,
-    skip: 1
-  }
-];
-
-const fakeToken = 'fakeToken';
-
-const request = nock(SERVERS.API, {
-  reqheaders: { 'authorization' : `bearer ${fakeToken}` }
-}).get('/v1/counters');
-
-request.reply(200, fakeCounters);
+// mock successful api call to
+// api.counter-culture.io/v1/counters
+mock.api.ok.getCounters();
 
 describe('Core API', () => {
   it('should get counters', async () => {
-    coreApi.token = fakeToken;
+    coreApi.token = stubs.token;
     const counters = await coreApi.getCounters();
-    expect(counters).toEqual(fakeCounters);
+    expect(counters).toEqual(stubs.counters);
   })
 })
