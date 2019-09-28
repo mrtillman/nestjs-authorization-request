@@ -14,5 +14,5 @@ const api = {
 }
 
 module.exports = {
-  api
+  _mock: { api }
 };
