@@ -3,6 +3,9 @@ const utils = {
     return promise
       .then(data => ([data, null]))
       .catch(error => Promise.resolve([null, error]));
+  },
+  queryParams: (url) => {
+    return (new URL(url)).searchParams;
   }
 };
 

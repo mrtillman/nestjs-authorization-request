@@ -1,6 +1,6 @@
 const secureApi = require('./index');
 const regexes = require('./regexes');
-const utils = require('./utils');
+const utils = require('../../utils');
 const stubs = require('./index.stubs');
 const mocks = require('./index.mocks');
 
