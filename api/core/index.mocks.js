@@ -6,7 +6,9 @@ const api = {
   ok: {
     getCounters: () => {
       nock(SERVERS.API, {
-        reqheaders: { 'authorization' : `bearer ${token}` }
+        reqheaders: { 
+          'authorization' : `bearer ${token}` 
+        }
       }).get('/v1/counters')
         .reply(200, counters);
     }

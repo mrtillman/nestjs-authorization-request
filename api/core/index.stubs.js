@@ -13,9 +13,7 @@ const counters = [
   }
 ];
 
-const token = "admit one";
-
 module.exports = {
   counters,
-  token,
+  token: "admit one"
 };
