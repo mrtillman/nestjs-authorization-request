@@ -23,7 +23,7 @@ NODE_ENV=development
 $ npm install
 ```
 
-## Running the app
+## Launching the app
 
 ```bash
 # development
@@ -47,7 +47,6 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
-```
 ```
 
 ## Usage
