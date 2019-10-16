@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const GRAPHQL = `${API}/graphql`;
 
-export class SERVERS {
+export default class SERVERS {
   public static get API(){ return API }
   public static get APP(){ return APP }
   public static get GRAPHQL(){ return GRAPHQL }
