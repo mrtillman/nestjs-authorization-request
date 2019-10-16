@@ -1,20 +1,22 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { SecureService } from '../services/secure.service';
-import GetToken from '../application/GetToken';
+import SecureService from '../services/secure.service';
+import GetTokenUseCase from '../application/GetTokenUseCase';
 
 @Controller()
 export class AppController {
   constructor(private readonly secureService: SecureService) {}
 
   @Get()
-  getAuthUrl(): String {
-    return this.secureService.authorizationUrl;
+  getAuthUrl(): string {
+    return this.secureService.AuthorizationUrl;
   }
 
   @Get('/oauth2/callback')
-  oauth2Callback(@Query('code') code: String, @Query('state') state: String): String {
-    var getToken = new GetToken(code, state);
-    var token = getToken.execute();
+  async oauth2Callback(@Query('code') code: string, @Query('state') state: string): Promise<string> {
+    var getToken = new GetTokenUseCase(this.secureService);
+    getToken.code = code;
+    getToken.state = state;
+    var token = await getToken.execute();
     return token;
   }
 }
