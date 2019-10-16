@@ -16,7 +16,6 @@ export class AppController {
     var getToken = new GetTokenUseCase(this.secureService);
     getToken.code = code;
     getToken.state = state;
-    var token = await getToken.execute();
-    return token;
+    return await getToken.execute();
   }
 }
