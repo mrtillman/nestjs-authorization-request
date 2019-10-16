@@ -1,29 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { SERVERS } from '../common/servers';
+import SERVERS from '../common/servers';
 import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
 import { ConfigService } from '../common/config.service';
 
-const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = process.env.REDIRECT_URI;
+import FetchWrapper from '../infrastructure/FetchWrapper';
 const response_type = "code";
 
+// TODO: cache state values
 let _state = '';
 
 @Injectable()
-export class SecureService {
+export default class SecureService {
   
-  private client_id: String;
-  private client_secret: String;
-  private redirect_uri: String;
+  private client_id: string;
+  private client_secret: string;
+  private redirect_uri: string;
+  private fetch: FetchWrapper;
 
   constructor(config: ConfigService) {
-    this.client_id = config.get('CLIENT_ID')
-    this.client_secret = config.get('CLIENT_SECRET')
-    this.redirect_uri = config.get('REDIRECT_URI')
+    this.client_id = config.get('CLIENT_ID');
+    this.client_secret = config.get('CLIENT_SECRET');
+    this.redirect_uri = config.get('REDIRECT_URI');
+    this.fetch = new FetchWrapper();
   }
-  get authorizationUrl(): String {
+
+  get AuthorizationUrl(): string {
     let authUrl = `${SERVERS.SECURE}/connect/authorize`;
     _state = makeGuid();
     const parameters = querystring.stringify({
@@ -35,4 +37,22 @@ export class SecureService {
     });
     return authUrl.concat('?', parameters);
   }
+
+  public async GetToken(code: string, state: string): Promise<string> {
+    if(state != _state) {
+      throw new Error('Forged Authorization Request');
+    }
+
+    const payload = querystring.stringify({
+      code,
+      redirect_uri: this.redirect_uri,
+      client_id: this.client_id,
+      client_secret: this.client_secret,
+      scope: 'openid',
+      grant_type: 'authorization_code',
+    });
+    
+    return await this.fetch.GetToken(payload);
+  }
+
 }
