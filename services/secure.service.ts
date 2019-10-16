@@ -2,10 +2,8 @@ import { Injectable } from '@nestjs/common';
 import SERVERS from '../common/servers';
 import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
-import { ConfigService } from '../common/config.service';
-
+import ConfigService from '../common/config.service';
 import FetchWrapper from '../infrastructure/FetchWrapper';
-const response_type = "code";
 
 // TODO: cache state values
 let _state = '';
@@ -18,18 +16,18 @@ export default class SecureService {
   private redirect_uri: string;
   private fetch: FetchWrapper;
 
-  constructor(config: ConfigService) {
+  constructor(config: ConfigService, fetchWrapper: FetchWrapper) {
     this.client_id = config.get('CLIENT_ID');
     this.client_secret = config.get('CLIENT_SECRET');
     this.redirect_uri = config.get('REDIRECT_URI');
-    this.fetch = new FetchWrapper();
+    this.fetch = fetchWrapper;
   }
 
   get AuthorizationUrl(): string {
     let authUrl = `${SERVERS.SECURE}/connect/authorize`;
     _state = makeGuid();
     const parameters = querystring.stringify({
-      response_type,
+      response_type: 'code',
       client_id: this.client_id,
       redirect_uri: this.redirect_uri,
       scope: 'openid',
