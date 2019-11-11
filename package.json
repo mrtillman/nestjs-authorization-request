@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "nest build && gulp",
     "format": "prettier --write \"presentation/**/*.ts\" \"tests/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -42,6 +42,7 @@
     "@types/node": "^12.7.5",
     "@types/supertest": "^2.0.8",
     "@types/uuid": "^3.4.5",
+    "gulp": "^4.0.2",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
