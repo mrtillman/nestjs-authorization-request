@@ -8,11 +8,8 @@ if (process.env.NODE_ENV !== 'production') {
   SECURE = 'http://counter-culture:5000';
 }
 
-const GRAPHQL = `${API}/graphql`;
-
 export default class SERVERS {
   public static get API(){ return API }
   public static get APP(){ return APP }
-  public static get GRAPHQL(){ return GRAPHQL }
   public static get SECURE(){ return SECURE }
 };
