@@ -1,14 +1,16 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Render } from '@nestjs/common';
 import SecureService from '../services/secure.service';
-import GetTokenUseCase from '../application/GetTokenUseCase';
+import GetTokenUseCase from '../application/GetToken';
 
 @Controller()
 export class AppController {
   constructor(private readonly secureService: SecureService) {}
 
   @Get()
-  getAuthUrl(): string {
-    return this.secureService.AuthorizationUrl;
+  @Render('index')
+  root() {
+    const { AuthorizationUrl } = this.secureService;
+    return { AuthorizationUrl };
   }
 
   @Get('/oauth2/callback')
