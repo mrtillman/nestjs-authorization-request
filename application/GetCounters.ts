@@ -1,13 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import IUseCase from './IUseCase';
+import CountersService from '../services/counters.service';
+import Counter from '../domain/counter';
 
 @Injectable()
-export default class GetCountersUseCase implements IUseCase<string> {
-  private _token: string;
-  constructor(token: string) {
-    this._token = token;   
+export default class GetCountersUseCase implements IUseCase<Array<Counter>> {
+
+  constructor(private readonly countersService: CountersService){}
+  
+  get token(): string {
+    return this.countersService.token;
   }
-  execute(): Promise<string> {
-    return Promise.resolve("");
+  set token(value: string) {
+    this.countersService.token = value;
+  }
+
+  public async execute(): Promise<Array<Counter>> {
+    return await this.countersService.GetCounters();
   }
 }
