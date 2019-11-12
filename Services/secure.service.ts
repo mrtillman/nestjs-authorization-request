@@ -5,6 +5,8 @@ import makeGuid = require('uuid/v1');
 import ConfigService from '../Common/config.service';
 import HttpShim from '../Infrastructure/http-shim';
 import AuthorizationRequest from '../Domain/authorization-request';
+import AuthorizationResponse from 'Domain/authorization-response';
+import Result from '../Common/result';
 
 let _state = '';
 
@@ -35,7 +37,7 @@ export default class SecureService {
     return authUrl.concat('?', parameters);
   }
 
-  public async getToken(code: string, state: string): Promise<string> {
+  public async getToken(code: string, state: string): Promise<Result<AuthorizationResponse>> {
     if(state != _state) {
       throw new Error('Forged Authorization Request');
     }
@@ -50,12 +52,18 @@ export default class SecureService {
     };
 
     const res = await this.httpShim.fetchToken(authRequest);
-
+    
     if (res.ok) {
       const data = await res.json();
-      return data.access_token;
+      const authResponse : AuthorizationResponse = {
+        accessToken: data.access_token,
+        expiresIn: data.expires_in,
+        scope: data.scope,
+        tokenType: data.token_type
+      };
+      return Result.Ok<AuthorizationResponse>(authResponse);
     }
     
-    throw new Error(res.statusText);
+    return Result.Fail<AuthorizationResponse>(res.statusText);
   }
 }
