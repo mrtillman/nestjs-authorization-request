@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import SERVERS from '../Common/servers';
 import HttpShim from '../Infrastructure/http-shim';
 import Counter from '../Domain/counter';
 
@@ -16,13 +15,11 @@ export default class CountersService {
   }
 
   public async GetCounters(): Promise<Array<Counter>> {   
-    this.httpShim.baseUrl = SERVERS.API;
-    const res =  await this.httpShim.get('v1/counters');
+    const res =  await this.httpShim.fetchCounters();
     if (res.ok) {
       const data = await res.json();
       return data;
     }
     throw new Error(res.statusText);
   }
-
 }

@@ -4,21 +4,22 @@ import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
 import ConfigService from '../Common/config.service';
 import HttpShim from '../Infrastructure/http-shim';
+import AuthorizationRequest from '../Domain/authorization-request';
 
 let _state = '';
 
 @Injectable()
 export default class SecureService {
   
-  private client_id: string;
-  private client_secret: string;
-  private redirect_uri: string;
+  private clientId: string;
+  private clientSecret: string;
+  private redirectUri: string;
 
   constructor(config: ConfigService, 
               private readonly httpShim: HttpShim) {
-    this.client_id = config.get('CLIENT_ID');
-    this.client_secret = config.get('CLIENT_SECRET');
-    this.redirect_uri = config.get('REDIRECT_URI');
+    this.clientId = config.get('CLIENT_ID');
+    this.clientSecret = config.get('CLIENT_SECRET');
+    this.redirectUri = config.get('REDIRECT_URI');
   }
 
   get authorizationUrl(): string {
@@ -26,8 +27,8 @@ export default class SecureService {
     _state = makeGuid();
     const parameters = querystring.stringify({
       response_type: 'code',
-      client_id: this.client_id,
-      redirect_uri: this.redirect_uri,
+      client_id: this.clientId,
+      redirect_uri: this.redirectUri,
       scope: 'openid',
       state: _state
     });
@@ -39,18 +40,16 @@ export default class SecureService {
       throw new Error('Forged Authorization Request');
     }
 
-    const content = querystring.stringify({
+    const authRequest : AuthorizationRequest = {
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
       code,
-      redirect_uri: this.redirect_uri,
-      client_id: this.client_id,
-      client_secret: this.client_secret,
-      scope: 'openid',
-      grant_type: 'authorization_code',
-    });
+      grantType: 'authorization_code',
+      redirectUri: this.redirectUri,
+      scope: 'openid'
+    };
 
-    this.httpShim.baseUrl = SERVERS.SECURE;
-
-    const res = await this.httpShim.post('connect/token', content);
+    const res = await this.httpShim.fetchToken(authRequest);
 
     if (res.ok) {
       const data = await res.json();
@@ -59,5 +58,4 @@ export default class SecureService {
     
     throw new Error(res.statusText);
   }
-
 }
