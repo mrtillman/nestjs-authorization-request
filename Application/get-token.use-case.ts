@@ -15,7 +15,7 @@ export default class GetTokenUseCase implements UseCase<string> {
   }
 
   public async execute(): Promise<string> {
-    return await this.secureService
-                     .getToken(this.code, this.state);  
+    const result = await this.secureService.getToken(this.code, this.state);
+    return result.Value.accessToken;
   }
 }
