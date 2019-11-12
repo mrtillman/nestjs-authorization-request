@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import ConfigModule from '../common/config.module';
-import SecureService from '../services/secure.service';
-import CountersService from '../services/counters.service';
-import FetchWrapper from '../infrastructure/FetchWrapper';
+import CountersModule from './counters.module';
+import SecureModule from './secure.module';
 
 @Module({
-  imports: [ConfigModule],
+  imports: [CountersModule, SecureModule],
   controllers: [AppController],
-  providers: [AppService, FetchWrapper, SecureService, CountersService],
+  providers: [AppService],
 })
 export class AppModule {}
