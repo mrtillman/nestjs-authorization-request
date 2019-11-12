@@ -1,3 +1,9 @@
+# prototypes & proof of concepts
+_
+
+# distributable code
+dist
+
 # Logs
 logs
 *.log
@@ -55,6 +61,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+development.env
 .env
 
 # next.js build output
