@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import CountersService from '../services/counters.service';
-import GetCountersUseCase from '../application/GetCounters';
-import FetchWrapper from '../infrastructure/FetchWrapper';
+import CountersService from '../Services/counters.service';
+import GetCountersUseCase from '../Application/GetCounters';
+import FetchWrapper from '../Infrastructure/FetchWrapper';
 
 @Module({
   providers: [FetchWrapper, CountersService, GetCountersUseCase],

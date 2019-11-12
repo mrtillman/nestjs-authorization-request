@@ -1,7 +1,7 @@
 import * as fetchImport from 'isomorphic-unfetch';
 import IFetchWrapper from './IFetchWrapper';
-import SERVERS from '../common/servers';
-import Counter from '../domain/counter';
+import SERVERS from '../Common/servers';
+import Counter from '../Domain/counter';
 
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default;
 
@@ -11,8 +11,8 @@ export default class FetchWrapper implements IFetchWrapper {
     const res = await fetch(`${SERVERS.SECURE}/connect/token`, {
       method: "POST",
       headers: {
-        "content-type": "application/x-www-form-urlencoded",
-        'accept': 'application/json'
+        "content-type": "Application/x-www-form-urlencoded",
+        'accept': 'Application/json'
       },
       body: parameters,
     });

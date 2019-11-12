@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Render } from '@nestjs/common';
-import GetTokenUseCase from '../application/GetToken';
-import GetCountersUseCase from '../application/GetCounters';
-import Counter from '../domain/counter';
+import GetTokenUseCase from '../Application/GetToken';
+import GetCountersUseCase from '../Application/GetCounters';
+import Counter from '../Domain/counter';
 
 @Controller()
 export class AppController {

@@ -1,4 +1,4 @@
-import Counter from '../domain/counter';
+import Counter from '../Domain/counter';
 
 export default interface IFetchWrapper {
   GetToken(querystring : string) : Promise<string>;

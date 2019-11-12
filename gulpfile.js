@@ -2,10 +2,10 @@ const gulp = require('gulp');
 
 function defaultTask(done) {
   gulp.src([
-    'presentation/**/*',
-    'presentation/**/*'
-  ], { "base" : "presentation" })
-  .pipe(gulp.dest('./dist/presentation'));
+    'Presentation/**/*',
+    'Presentation/**/*'
+  ], { "base" : "Presentation" })
+  .pipe(gulp.dest('./dist/Presentation'));
   done();
 }
 

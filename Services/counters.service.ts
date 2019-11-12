@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import FetchWrapper from '../infrastructure/FetchWrapper';
-import Counter from '../domain/counter';
+import FetchWrapper from '../Infrastructure/FetchWrapper';
+import Counter from '../Domain/counter';
 
 @Injectable()
 export default class CountersService {

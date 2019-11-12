@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import SERVERS from '../common/servers';
+import SERVERS from '../Common/servers';
 import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
-import ConfigService from '../common/config.service';
-import FetchWrapper from '../infrastructure/FetchWrapper';
+import ConfigService from '../Common/config.service';
+import FetchWrapper from '../Infrastructure/FetchWrapper';
 
 // TODO: cache state values
 let _state = '';

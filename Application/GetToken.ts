@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import SecureService from '../services/secure.service';
+import SecureService from '../Services/secure.service';
 import IUseCase from './IUseCase';
 
 @Injectable()
