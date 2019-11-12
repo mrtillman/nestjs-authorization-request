@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import CountersService from '../Services/counters.service';
 import GetCountersUseCase from '../Application/get-counters.use-case';
-import FetchWrapper from '../Infrastructure/fetch-wrapper';
+import HttpShim from '../Infrastructure/http-shim';
 
 @Module({
-  providers: [FetchWrapper, CountersService, GetCountersUseCase],
+  providers: [HttpShim, CountersService, GetCountersUseCase],
   exports: [GetCountersUseCase],
 })
 export default class CountersModule {}
