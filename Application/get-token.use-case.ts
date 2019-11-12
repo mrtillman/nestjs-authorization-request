@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import SecureService from '../Services/secure.service';
-import IUseCase from './IUseCase';
+import UseCase from './use-case.interface';
 
 @Injectable()
-export default class GetTokenUseCase implements IUseCase<string> {
+export default class GetTokenUseCase implements UseCase<string> {
   
   constructor(private readonly secureService : SecureService){ }
 
   public code: string;
   public state: string;
 
-  public get AuthorizationUrl(): string {
+  public get authorizationUrl(): string {
     return this.secureService.AuthorizationUrl;
   }
 

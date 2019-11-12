@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Render } from '@nestjs/common';
-import GetTokenUseCase from '../Application/GetToken';
-import GetCountersUseCase from '../Application/GetCounters';
+import GetTokenUseCase from '../Application/get-token.use-case';
+import GetCountersUseCase from '../Application/get-counters.use-case';
 import Counter from '../Domain/counter';
 
 @Controller()
@@ -11,8 +11,8 @@ export class AppController {
   @Get()
   @Render('index')
   root() {
-    const { AuthorizationUrl } = this.getToken;
-    return { AuthorizationUrl };
+    const { authorizationUrl } = this.getToken;
+    return { authorizationUrl };
   }
 
   @Get('/oauth2/callback')

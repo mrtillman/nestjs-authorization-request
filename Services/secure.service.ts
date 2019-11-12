@@ -3,7 +3,7 @@ import SERVERS from '../Common/servers';
 import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
 import ConfigService from '../Common/config.service';
-import FetchWrapper from '../Infrastructure/FetchWrapper';
+import FetchWrapper from '../Infrastructure/fetch-wrapper';
 
 // TODO: cache state values
 let _state = '';

@@ -1,5 +1,5 @@
 import * as fetchImport from 'isomorphic-unfetch';
-import IFetchWrapper from './IFetchWrapper';
+import IFetchWrapper from './fetch-wrapper.interface';
 import SERVERS from '../Common/servers';
 import Counter from '../Domain/counter';
 

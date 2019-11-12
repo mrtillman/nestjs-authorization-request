@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import FetchWrapper from '../Infrastructure/FetchWrapper';
+import FetchWrapper from '../Infrastructure/fetch-wrapper';
 import Counter from '../Domain/counter';
 
 @Injectable()
