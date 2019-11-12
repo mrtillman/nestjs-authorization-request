@@ -5,13 +5,14 @@ import IUseCase from './IUseCase';
 @Injectable()
 export default class GetTokenUseCase implements IUseCase<string> {
   
-  constructor(secureService : SecureService){
-    this.secureService = secureService;
-  }
+  constructor(private readonly secureService : SecureService){ }
 
   public code: string;
   public state: string;
-  private secureService: SecureService;
+
+  public get AuthorizationUrl(): string {
+    return this.secureService.AuthorizationUrl;
+  }
 
   public async execute(): Promise<string> {
     return await this.secureService
