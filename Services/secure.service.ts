@@ -3,9 +3,8 @@ import SERVERS from '../Common/servers';
 import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
 import ConfigService from '../Common/config.service';
-import FetchWrapper from '../Infrastructure/fetch-wrapper';
+import HttpShim from '../Infrastructure/http-shim';
 
-// TODO: cache state values
 let _state = '';
 
 @Injectable()
@@ -14,16 +13,15 @@ export default class SecureService {
   private client_id: string;
   private client_secret: string;
   private redirect_uri: string;
-  private fetch: FetchWrapper;
 
-  constructor(config: ConfigService, fetchWrapper: FetchWrapper) {
+  constructor(config: ConfigService, 
+              private readonly httpShim: HttpShim) {
     this.client_id = config.get('CLIENT_ID');
     this.client_secret = config.get('CLIENT_SECRET');
     this.redirect_uri = config.get('REDIRECT_URI');
-    this.fetch = fetchWrapper;
   }
 
-  get AuthorizationUrl(): string {
+  get authorizationUrl(): string {
     let authUrl = `${SERVERS.SECURE}/connect/authorize`;
     _state = makeGuid();
     const parameters = querystring.stringify({
@@ -36,12 +34,12 @@ export default class SecureService {
     return authUrl.concat('?', parameters);
   }
 
-  public async GetToken(code: string, state: string): Promise<string> {
+  public async getToken(code: string, state: string): Promise<string> {
     if(state != _state) {
       throw new Error('Forged Authorization Request');
     }
 
-    const payload = querystring.stringify({
+    const content = querystring.stringify({
       code,
       redirect_uri: this.redirect_uri,
       client_id: this.client_id,
@@ -49,8 +47,17 @@ export default class SecureService {
       scope: 'openid',
       grant_type: 'authorization_code',
     });
+
+    this.httpShim.baseUrl = SERVERS.SECURE;
+
+    const res = await this.httpShim.post('connect/token', content);
+
+    if (res.ok) {
+      const data = await res.json();
+      return data.access_token;
+    }
     
-    return await this.fetch.GetToken(payload);
+    throw new Error(res.statusText);
   }
 
 }
