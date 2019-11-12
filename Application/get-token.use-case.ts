@@ -11,11 +11,11 @@ export default class GetTokenUseCase implements UseCase<string> {
   public state: string;
 
   public get authorizationUrl(): string {
-    return this.secureService.AuthorizationUrl;
+    return this.secureService.authorizationUrl;
   }
 
   public async execute(): Promise<string> {
     return await this.secureService
-                     .GetToken(this.code, this.state);  
+                     .getToken(this.code, this.state);  
   }
 }
