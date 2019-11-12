@@ -11,16 +11,24 @@ export class AppController {
   @Get()
   @Render('index')
   root() {
+    // 1. Begin Authorization Request
     const { authorizationUrl } = this.getToken;
     return { authorizationUrl };
   }
 
+  // 2. Authorization Grant
   @Get('/oauth2/callback')
   async oauth2Callback(@Query('code') code: string, @Query('state') state: string): Promise<Array<Counter>> {
     const { getToken, getCounters } = this;
+    
+    // 3. Authorization Grant
     getToken.code = code;
     getToken.state = state;
+    
+    // 4. Access Token
     getCounters.token = await getToken.execute();
+    
+    // 6. Protected Resource
     return await getCounters.execute();
   }
 }
