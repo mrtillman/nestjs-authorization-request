@@ -8,12 +8,12 @@ export class AppController {
   constructor(private readonly getToken: GetTokenUseCase,
               private readonly getCounters: GetCountersUseCase){}
   
-  @Get('/')
+  @Get('/hello')
   root(){
     return 'Hello World!';
   }
 
-  @Get()
+  @Get('/')
   @Render('index')
   index() {
     // 1. Begin Authorization Request
