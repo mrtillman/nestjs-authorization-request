@@ -1,6 +1,6 @@
-# expressjs-authorization-request
+# nestjs-authorization-request
 
-Demonstrates [How to Send an Authorization Request](https://github.com/mrtillman/counter-culture.secure/wiki/How-To-Send-an-Authorization-Request) using the [Nest](https://github.com/nestjs/nest) framework TypeScript.
+Demonstrates [How to Send an Authorization Request](https://github.com/mrtillman/counter-culture.secure/wiki/How-To-Send-an-Authorization-Request) using the [Nest](https://github.com/nestjs/nest) framework.
 
 ---
 
