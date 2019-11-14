@@ -1,6 +1,6 @@
 import SERVERS from '../Common/servers';
 import * as fetchImport from 'isomorphic-unfetch';
-import AuthorizationRequest from '../Domain/authorization-request';
+import AuthorizationRequest from '../Domain/auth-request';
 import querystring = require('querystring');
 
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default;
