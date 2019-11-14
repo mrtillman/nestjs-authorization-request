@@ -31,4 +31,8 @@ export class AppController {
     // 6. Protected Resource
     return await getCounters.execute();
   }
+
+  getHello(): String {
+    return "Hello World!";
+  }
 }
