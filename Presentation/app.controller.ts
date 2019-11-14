@@ -7,10 +7,15 @@ import Counter from '../Domain/counter';
 export class AppController {
   constructor(private readonly getToken: GetTokenUseCase,
               private readonly getCounters: GetCountersUseCase){}
+  
+  @Get('/')
+  root(){
+    return 'Hello World!';
+  }
 
   @Get()
   @Render('index')
-  root() {
+  index() {
     // 1. Begin Authorization Request
     const { authorizationUrl } = this.getToken;
     return { authorizationUrl };
