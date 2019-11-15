@@ -1,11 +1,7 @@
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
-
 export default class ConfigService {
   private readonly envConfig: { [key: string]: string };
-
-  constructor(filePath: string) {
-    this.envConfig = dotenv.parse(fs.readFileSync(filePath))
+  constructor(configJson: { [key: string]: string }) {
+    this.envConfig = configJson;
   }
 
   get(key: string): string {
