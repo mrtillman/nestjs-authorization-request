@@ -59,7 +59,13 @@
       "json",
       "ts"
     ],
-    "rootDir": "Presentation",
+    "roots": [
+      "Application",
+      "Common",
+      "Infrastructure",
+      "Presentation",
+      "Services"
+    ],
     "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

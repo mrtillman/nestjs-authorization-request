@@ -2,10 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import CountersModule from './counters.module';
 import SecureModule from './secure.module';
-import authUrlRegEx from '../Common/auth-url.reg-exp';
+import AuthorizationUrlRegExp from '../Common/auth-url.reg-exp';
 
 describe('AppController', () => {
   let appController: AppController;
+  let authUrlRegExp: AuthorizationUrlRegExp;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -14,6 +15,7 @@ describe('AppController', () => {
     }).compile();
 
     appController = app.get<AppController>(AppController);
+    authUrlRegExp = new AuthorizationUrlRegExp();
   });
 
   describe('index', () => {
@@ -27,8 +29,8 @@ describe('AppController', () => {
     });
     it('authorization url should not be malformed', () => {
       const model = appController.index();
-      const { authorizationUrl } = model;
-      expect(authUrlRegEx.test(authorizationUrl)).toBe(true);
+      const isMalformed = !authUrlRegExp.test(model.authorizationUrl);
+      expect(isMalformed).toBe(false);
     });
   });
 });
