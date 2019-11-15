@@ -30,7 +30,7 @@ export class AppController {
     getToken.code = code;
     getToken.state = state;
     
-    // 4. Access Token
+    // 4. & 5. Access Token
     getCounters.token = await getToken.execute();
     
     // 6. Protected Resource
