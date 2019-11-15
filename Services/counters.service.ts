@@ -14,7 +14,7 @@ export default class CountersService {
     this.httpShim.token = value;
   }
 
-  public async GetCounters(): Promise<Array<Counter>> {   
+  public async getCounters(): Promise<Array<Counter>> {   
     const res =  await this.httpShim.fetchCounters();
     if (res.ok) {
       const data = await res.json();
