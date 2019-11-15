@@ -7,11 +7,6 @@ import Counter from '../Domain/counter';
 export class AppController {
   constructor(private readonly getToken: GetTokenUseCase,
               private readonly getCounters: GetCountersUseCase){}
-  
-  @Get('/hello')
-  root(){
-    return 'Hello World!';
-  }
 
   @Get('/')
   @Render('index')
@@ -35,9 +30,5 @@ export class AppController {
     
     // 6. Protected Resource
     return await getCounters.execute();
-  }
-
-  getHello(): String {
-    return "Hello World!";
   }
 }
