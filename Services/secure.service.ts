@@ -5,7 +5,7 @@ import makeGuid = require('uuid/v1');
 import ConfigService from './config.service';
 import HttpShim from '../Infrastructure/http-shim';
 import AuthorizationRequest from '../Domain/auth-request';
-import AuthorizationResponse from 'Domain/auth-response';
+import AuthorizationResponse from '../Domain/auth-response';
 import Result from '../Common/result';
 
 let _state = '';
