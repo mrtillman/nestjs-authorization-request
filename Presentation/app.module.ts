@@ -7,4 +7,4 @@ import SecureModule from './secure.module';
   imports: [CountersModule, SecureModule],
   controllers: [AppController],
 })
-export class AppModule {}
+export default class AppModule {}
