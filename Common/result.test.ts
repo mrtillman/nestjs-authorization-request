@@ -1,9 +1,9 @@
-import GetCoutersUseCase from '../Application/get-counters.use-case';
+import GetCountersUseCase from '../Application/get-counters.use-case';
 
 describe('GetCountersUseCase', () => {
-  let useCase : GetCoutersUseCase;
+  let useCase : GetCountersUseCase;
   beforeEach(() => {
-    useCase = new GetCoutersUseCase(null);
+    useCase = new GetCountersUseCase(null);
   })
   it('should work', () => {
     expect(useCase.execute).toBeDefined();
