@@ -16,6 +16,6 @@ export default class GetCountersUseCase implements UseCase<Array<Counter>> {
   }
 
   public async execute(): Promise<Array<Counter>> {
-    return await this.countersService.GetCounters();
+    return await this.countersService.getCounters();
   }
 }
