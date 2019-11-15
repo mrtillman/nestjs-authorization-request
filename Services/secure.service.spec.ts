@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import SecureService from './secure.service';
-import ConfigModule from '../Common/config.module';
+import ConfigModule from '../Presentation/config.module';
 import HttpShim from '../Infrastructure/http-shim';
 
 describe('SecureService', () => {
