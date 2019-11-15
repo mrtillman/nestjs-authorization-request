@@ -12,8 +12,7 @@ export class AppController {
   @Render('index')
   index() {
     // 1. Begin Authorization Request
-    const { authorizationUrl } = this.getToken;
-    return { authorizationUrl };
+    return this.getToken.authorizationUrl;
   }
 
   // 2. Authorization Grant
