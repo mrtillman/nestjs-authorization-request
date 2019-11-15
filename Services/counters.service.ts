@@ -5,20 +5,25 @@ import Counter from '../Domain/counter';
 @Injectable()
 export default class CountersService {
 
-  constructor(private readonly httpShim: HttpShim){}
+  constructor(private readonly http: HttpShim){}
 
   get token(): string {
-    return this.httpShim.token;
+    return this.http.token;
   }
   set token(value: string) {
-    this.httpShim.token = value;
+    this.http.token = value;
   }
 
   public async getCounters(): Promise<Array<Counter>> {   
-    const res =  await this.httpShim.fetchCounters();
+    const res =  await this.http.fetchCounters();
     if (res.ok) {
-      const data = await res.json();
-      return data;
+      const counters = await res.json();
+      return Array.from(counters, (counter: Counter) => ({
+        _id: counter._id,
+        name: counter.name,
+        value: counter.value,
+        skip: counter.skip,
+      }));
     }
     throw new Error(res.statusText);
   }

@@ -18,7 +18,7 @@ export default class SecureService {
   private redirectUri: string;
 
   constructor(config: ConfigService, 
-              private readonly httpShim: HttpShim) {
+              private readonly http: HttpShim) {
     this.clientId = config.get('CLIENT_ID');
     this.clientSecret = config.get('CLIENT_SECRET');
     this.redirectUri = config.get('REDIRECT_URI');
@@ -51,7 +51,7 @@ export default class SecureService {
       scope: 'openid'
     };
 
-    const res = await this.httpShim.fetchToken(authRequest);
+    const res = await this.http.fetchToken(authRequest);
     
     if (res.ok) {
       const data = await res.json();
