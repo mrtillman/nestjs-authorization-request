@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import SERVERS from '../Common/servers';
 import querystring = require('querystring');
 import makeGuid = require('uuid/v1');
-import ConfigService from '../Common/config.service';
+import ConfigService from './config.service';
 import HttpShim from '../Infrastructure/http-shim';
 import AuthorizationRequest from '../Domain/auth-request';
 import AuthorizationResponse from 'Domain/auth-response';
