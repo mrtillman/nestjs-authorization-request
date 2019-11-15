@@ -12,6 +12,8 @@ const requestParameters : string = [
   "(?=.*(&state=(.*)))",
 ].join('');
 
-const authUrlRegEx : RegExp = new RegExp(`^((http|https)://(${hostNames})/connect/authorize\\?${requestParameters})(.*)$`);
-
-export default authUrlRegEx;
+export default class AuthorizationUrlRegExp extends RegExp {
+  constructor(){
+    super(`^((http|https)://(${hostNames})/connect/authorize\\?${requestParameters})(.*)$`);
+  }
+}
