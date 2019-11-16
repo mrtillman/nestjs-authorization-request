@@ -12,7 +12,7 @@ export class AppController {
   @Render('index')
   index() {
     // 1. Begin Authorization Request
-    return this.getToken.authorizationUrl;
+    return { authorizationUrl: this.getToken.authorizationUrl };
   }
 
   // 2. Authorization Grant
