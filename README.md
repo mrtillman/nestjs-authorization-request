@@ -42,17 +42,14 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
+# end-to-end tests
 $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
-```
 
-## Acceptance Tests
-
-```bash
-cd Specification && npm test
+# acceptance tests
+$ npm run test:spec
 ```
 
 ## Usage
