@@ -36,7 +36,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Tests
 
 ```bash
 # unit tests
@@ -47,6 +47,12 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Acceptance Tests
+
+```bash
+cd Specification && npm test
 ```
 
 ## Usage
