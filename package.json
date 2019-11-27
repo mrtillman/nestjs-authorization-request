@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./Tests/jest-e2e.json",
-    "test:spec": "cucumber-js Specification/Features/**/*.feature"
+    "test:spec": "cucumber-js Specification/**/*.feature"
   },
   "dependencies": {
     "@nestjs/common": "^6.7.2",
