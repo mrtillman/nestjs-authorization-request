@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import UseCase from './use-case.interface';
-import CountersService from '../Services/counters.service';
-import Counter from '../Domain/counter';
+import { UseCase } from './use-case.interface';
+import { CountersService } from '../Services/counters.service';
+import { Counter } from '../Domain/counter';
 
 @Injectable()
-export default class GetCountersUseCase implements UseCase<Array<Counter>> {
+export class GetCountersUseCase implements UseCase<Array<Counter>> {
 
   constructor(private readonly countersService: CountersService){}
   

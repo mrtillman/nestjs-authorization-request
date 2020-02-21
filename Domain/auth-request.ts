@@ -1,4 +1,4 @@
-export default class AuthorizationRequest
+export class AuthorizationRequest
 {
   public clientId: string;
   public clientSecret: string;

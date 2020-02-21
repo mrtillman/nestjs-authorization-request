@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import HttpShim from '../Infrastructure/http-shim';
-import Counter from '../Domain/counter';
+import { HttpShim } from '../Infrastructure/http-shim';
+import { Counter } from '../Domain/counter';
 
 @Injectable()
-export default class CountersService {
+export class CountersService {
 
   constructor(private readonly http: HttpShim){}
 

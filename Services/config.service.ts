@@ -1,4 +1,4 @@
-export default class ConfigService {
+export class ConfigService {
   private readonly envConfig: { [key: string]: string };
   constructor(configJson: { [key: string]: string }) {
     this.envConfig = configJson;

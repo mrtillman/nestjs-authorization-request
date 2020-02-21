@@ -1,3 +1,3 @@
-export default interface UseCase<T> {
+export interface UseCase<T> {
   execute(): Promise<T>;
 }

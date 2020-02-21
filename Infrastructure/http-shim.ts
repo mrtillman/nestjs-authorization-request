@@ -1,11 +1,11 @@
-import SERVERS from '../Common/servers';
 import * as fetchImport from 'isomorphic-unfetch';
-import AuthorizationRequest from '../Domain/auth-request';
+import { SERVERS } from '../Common/servers';
+import { AuthorizationRequest } from '../Domain/auth-request';
 import querystring = require('querystring');
 
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default;
 
-export default class HttpShim {
+export class HttpShim {
   public token: string;
   
   async fetchCounters() : Promise<Response> {

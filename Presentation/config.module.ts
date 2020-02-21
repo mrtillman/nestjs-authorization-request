@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import ConfigService from '../Services/config.service';
+import { ConfigService } from '../Services/config.service';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 
@@ -15,4 +15,4 @@ const configJson = dotenv.parse(fs.readFileSync(configFilePath));
   ],
   exports: [ConfigService],
 })
-export default class ConfigModule {}
+export class ConfigModule {}

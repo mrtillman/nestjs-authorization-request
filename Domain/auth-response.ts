@@ -1,4 +1,4 @@
-export default class AuthorizationResponse
+export class AuthorizationResponse
 {
   public accessToken: string
   public expiresIn: string

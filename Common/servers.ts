@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
   SECURE = 'http://counter-culture:5000';
 }
 
-export default class SERVERS {
+export class SERVERS {
   public static get API(){ return API }
   public static get APP(){ return APP }
   public static get SECURE(){ return SECURE }

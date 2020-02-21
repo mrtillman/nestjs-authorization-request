@@ -1,4 +1,4 @@
-import GetCountersUseCase from './get-counters.use-case';
+import { GetCountersUseCase } from './get-counters.use-case';
 
 describe('GetCountersUseCase', () => {
   let useCase : GetCountersUseCase;

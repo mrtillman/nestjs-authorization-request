@@ -1,4 +1,4 @@
-export default class Result<T> {
+export class Result<T> {
   constructor(DidSucceed: Boolean, ErrorMessage: string = ""){
     this.didSucceed = DidSucceed;
     this.didFail = !DidSucceed;

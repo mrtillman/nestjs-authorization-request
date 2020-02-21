@@ -1,4 +1,4 @@
-import GetTokenUseCase from './get-token.use-case';
+import { GetTokenUseCase } from './get-token.use-case';
 
 describe('GetTokenUseCase', () => {
   let useCase : GetTokenUseCase;
