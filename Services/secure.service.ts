@@ -31,7 +31,7 @@ export default class SecureService {
       response_type: 'code',
       client_id: this.clientId,
       redirect_uri: this.redirectUri,
-      scope: 'openid',
+      scope: 'openid offline_access',
       state: _state
     });
     return authUrl.concat('?', parameters);
@@ -59,7 +59,8 @@ export default class SecureService {
         accessToken: data.access_token,
         expiresIn: data.expires_in,
         scope: data.scope,
-        tokenType: data.token_type
+        tokenType: data.token_type,
+        refreshToken: data.refresh_token
       };
       return Result.Ok<AuthorizationResponse>(authResponse);
     }
