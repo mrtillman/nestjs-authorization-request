@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import CountersModule from './counters.module';
-import SecureModule from './secure.module';
-import AuthorizationUrlRegExp from '../Common/auth-url.reg-exp';
+import { CountersModule } from './counters.module';
+import { SecureModule } from './secure.module';
+import { AuthorizationUrlRegExp } from '../Common/auth-url.reg-exp';
 
 describe('AppController', () => {
   let appController: AppController;
