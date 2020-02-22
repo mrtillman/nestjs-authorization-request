@@ -5,7 +5,7 @@ function defaultTask(done) {
     'Presentation/**/*',
     'Presentation/**/*'
   ], { "base" : "Presentation" })
-  .pipe(gulp.dest('./dist/Presentation'));
+  .pipe(gulp.dest('./Release/Presentation'));
   done();
 }
 
