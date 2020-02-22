@@ -35,4 +35,21 @@ export class HttpShim {
       body: requestParameters,
     });
   }
+
+  async renewToken(authRequest: AuthorizationRequest) : Promise<Response> {
+    const requestParameters = querystring.stringify({
+      client_id: authRequest.clientId,
+      client_secret: authRequest.clientSecret,
+      grant_type: authRequest.grantType,
+      refresh_token: authRequest.refreshToken
+    });
+    return await fetch(`${SERVERS.SECURE}/connect/token`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        'accept': 'application/json'
+      },
+      body: requestParameters,
+    });
+  }
 }
