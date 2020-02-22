@@ -3,8 +3,7 @@ import { ConfigService } from '../Services/config.service';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 
-const configFilePath = `${process.env.NODE_ENV || 'development'}.env`;
-const configJson = dotenv.parse(fs.readFileSync(configFilePath));
+const configJson = dotenv.parse(fs.readFileSync('.env'));
 
 @Module({
   providers: [
