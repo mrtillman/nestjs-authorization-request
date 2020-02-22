@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf Release",
+    "postinstall": "npm run build",
     "build": "nest build && gulp",
     "format": "prettier --write \"Presentation/**/*.ts\" \"Tests/**/*.ts\"",
     "start": "nest start",
@@ -54,7 +55,8 @@
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "serialize-javascript": ">=2.1.1"
   },
   "jest": {
     "moduleFileExtensions": [
