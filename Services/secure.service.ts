@@ -53,6 +53,25 @@ export class SecureService {
 
     const res = await this.http.fetchToken(authRequest);
     
+    return this._handleAuthResponse(res);
+    
+  }
+
+  public async renewToken(refreshToken: string): Promise<Result<AuthorizationResponse>>{
+    
+    const authRequest : AuthorizationRequest = {
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
+      grantType: 'refresh_token',
+      refreshToken,
+    };
+    
+    const res = await this.http.renewToken(authRequest);
+    
+    return this._handleAuthResponse(res);
+  }
+
+  private async _handleAuthResponse(res:Response): Promise<Result<AuthorizationResponse>> {
     if (res.ok) {
       const data = await res.json();
       const authResponse : AuthorizationResponse = {
@@ -64,7 +83,6 @@ export class SecureService {
       };
       return Result.Ok<AuthorizationResponse>(authResponse);
     }
-    
     return Result.Fail<AuthorizationResponse>(res.statusText);
   }
 }
