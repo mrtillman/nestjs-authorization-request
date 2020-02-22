@@ -46,7 +46,7 @@ export class AppController {
     return counters;
   }
 
-  @Get('/renew')
+  @Get('/renewtoken')
   async renewToken(){
     if(!authResponse) return;
     return await this.renewTokenUseCase.execute();
