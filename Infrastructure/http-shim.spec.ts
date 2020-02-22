@@ -1,4 +1,4 @@
-import HttpShim from './http-shim';
+import { HttpShim } from './http-shim';
 
 describe('HttpShim', () => {
   let http : HttpShim;

@@ -1,5 +1,4 @@
-const GetCountersUseCaseImport = require('../dist/Application/get-counters.use-case');
-const GetCountersUseCase = GetCountersUseCaseImport.default;
+const { GetCountersUseCase } = require('../Release/Application/get-counters.use-case');
 const BaseFeature = require('./base.feature');
 
 module.exports = class GetCountersFeature extends BaseFeature {

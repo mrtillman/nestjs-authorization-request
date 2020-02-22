@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
-import CountersService from './counters.service';
-import HttpShim from '../Infrastructure/http-shim';
+import { CountersService } from './counters.service';
+import { HttpShim } from '../Infrastructure/http-shim';
 
 describe('CountersService', () => {
   let service: CountersService;

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import AppModule from '../Presentation/app.module';
-import GetTokenUseCase from '../Application/get-token.use-case';
-import GetCountersUseCase from '../Application/get-counters.use-case';
+import { AppModule } from '../Presentation/app.module';
+import { GetTokenUseCase } from '../Application/get-token.use-case';
+import { GetCountersUseCase } from '../Application/get-counters.use-case';
 import { join } from 'path';
 
 describe('AppController (e2e)', () => {

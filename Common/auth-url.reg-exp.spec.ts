@@ -1,4 +1,4 @@
-import AuthorizationUrlRegExp from './auth-url.reg-exp';
+import { AuthorizationUrlRegExp } from './auth-url.reg-exp';
 
 describe('GetCountersUseCase', () => {
   let regex : AuthorizationUrlRegExp;
