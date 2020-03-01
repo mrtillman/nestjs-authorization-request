@@ -13,8 +13,6 @@ export class AppController {
     private readonly renewTokenUseCase: RenewTokenUseCase
   ) {}
 
-  private readonly authResponseKey: string = "authResponse";
-
   @Get("/")
   @Render("index")
   index() {
