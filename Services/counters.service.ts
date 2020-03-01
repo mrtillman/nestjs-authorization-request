@@ -5,17 +5,17 @@ import { Counter } from '../Domain/counter';
 @Injectable()
 export class CountersService {
 
-  constructor(private readonly http: ServiceAgent){}
+  constructor(private readonly agent: ServiceAgent){}
 
   get token(): string {
-    return this.http.token;
+    return this.agent.token;
   }
   set token(value: string) {
-    this.http.token = value;
+    this.agent.token = value;
   }
 
   public async getCounters(): Promise<Array<Counter>> {   
-    const res =  await this.http.fetchCounters();
+    const res =  await this.agent.fetchCounters();
     if (res.ok) {
       const counters = await res.json();
       return Array.from(counters, (counter: Counter) => ({
