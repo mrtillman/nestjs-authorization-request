@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { HttpShim } from '../Infrastructure/http-shim';
+import { ServiceAgent } from '../Infrastructure/service-agent';
 import { Counter } from '../Domain/counter';
 
 @Injectable()
 export class CountersService {
 
-  constructor(private readonly http: HttpShim){}
+  constructor(private readonly http: ServiceAgent){}
 
   get token(): string {
     return this.http.token;

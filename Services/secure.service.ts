@@ -3,7 +3,7 @@ import makeGuid = require('uuid/v1');
 import { Injectable } from '@nestjs/common';
 import { SERVERS } from '../Common/servers';
 import { ConfigService } from './config.service';
-import { HttpShim } from '../Infrastructure/http-shim';
+import { ServiceAgent } from '../Infrastructure/service-agent';
 import { AuthorizationRequest } from '../Domain/auth-request';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { Result } from '../Common/result';
@@ -18,7 +18,7 @@ export class SecureService {
   private redirectUri: string;
 
   constructor(config: ConfigService, 
-              private readonly http: HttpShim) {
+              private readonly agent: ServiceAgent) {
     this.clientId = config.get('CLIENT_ID');
     this.clientSecret = config.get('CLIENT_SECRET');
     this.redirectUri = config.get('REDIRECT_URI');
@@ -51,7 +51,7 @@ export class SecureService {
       scope: 'openid'
     };
 
-    const res = await this.http.fetchToken(authRequest);
+    const res = await this.agent.fetchToken(authRequest);
     
     return this._handleAuthResponse(res);
     
@@ -66,7 +66,7 @@ export class SecureService {
       refreshToken,
     };
     
-    const res = await this.http.renewToken(authRequest);
+    const res = await this.agent.renewToken(authRequest);
     
     return this._handleAuthResponse(res);
   }

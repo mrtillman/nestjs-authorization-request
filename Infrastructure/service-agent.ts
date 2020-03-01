@@ -5,7 +5,7 @@ import querystring = require('querystring');
 
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default;
 
-export class HttpShim {
+export class ServiceAgent {
   public token: string;
   
   async fetchCounters() : Promise<Response> {

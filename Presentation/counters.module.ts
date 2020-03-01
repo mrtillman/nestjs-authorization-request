@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { CountersService } from '../Services/counters.service';
-import { GetCountersUseCase } from '../Application/get-counters.use-case';
-import { HttpShim } from '../Infrastructure/http-shim';
+import { Module } from "@nestjs/common";
+import { CountersService } from "../Services/counters.service";
+import { GetCountersUseCase } from "../Application/get-counters.use-case";
+import { ServiceAgent } from "../Infrastructure/service-agent";
 
 @Module({
-  providers: [HttpShim, CountersService, GetCountersUseCase],
-  exports: [GetCountersUseCase],
+  providers: [ServiceAgent, CountersService, GetCountersUseCase],
+  exports: [GetCountersUseCase]
 })
 export class CountersModule {}
