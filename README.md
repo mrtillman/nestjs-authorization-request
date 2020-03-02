@@ -17,7 +17,7 @@ Next, find `demo.env` in the project root, rename it to `.env`, and set your env
 ```sh
 CLIENT_ID={CLIENT_ID}
 CLIENT_SECRET={CLIENT_SECRET}
-REDIRECT_URI=http://localhost:8080/oauth2/callback
+REDIRECT_URI=http://counter-culture:8080/oauth2/callback
 NODE_ENV=development
 ```
 
@@ -58,9 +58,9 @@ $ npm run test:spec
 
 ## Usage
 
-Open http://localhost:8080 to view it in the browser. You can sign in using one of the [demo accounts](https://github.com/mrtillman/counter-culture.secure/blob/master/README.md#usage).
+Open http://counter-culture:8080 to view it in the browser. You can sign in using one of the [demo accounts](https://github.com/mrtillman/counter-culture.secure/blob/master/README.md#usage).
 
-To flex the token refresh logic, visit http://localhost:8080/renewtoken.
+To flex the token refresh logic, visit http://counter-culture:8080/renewtoken.
 
 ## License
 
