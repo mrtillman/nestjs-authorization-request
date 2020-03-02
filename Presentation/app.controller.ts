@@ -3,7 +3,6 @@ import { Controller, Get, Query, Render, Response } from "@nestjs/common";
 import { GetTokenUseCase } from "../Application/get-token.use-case";
 import { GetCountersUseCase } from "../Application/get-counters.use-case";
 import { RenewTokenUseCase } from "../Application/renew-token.use-case";
-import { AuthorizationResponse } from "Domain/auth-response";
 
 @Controller()
 export class AppController {
@@ -26,22 +25,20 @@ export class AppController {
     @Query("code") code: string,
     @Query("state") state: string
   ): Promise<any> {
-    const { getTokenUseCase, getCountersUseCase, renewTokenUseCase } = this;
-
     // 3. Authorization Grant (outbound)
-    getTokenUseCase.code = code;
-    getTokenUseCase.state = state;
+    this.getTokenUseCase.code = code;
+    this.getTokenUseCase.state = state;
 
     // 4. Access Token (inbound)
-    const authResponse = await getTokenUseCase.execute();
+    const authResponse = await this.getTokenUseCase.execute();
 
     // 5. Access Token (outbound)
-    getCountersUseCase.token = authResponse.accessToken;
+    this.getCountersUseCase.token = authResponse.accessToken;
 
     // 6. Protected Resource
-    const counters = await getCountersUseCase.execute();
+    const counters = await this.getCountersUseCase.execute();
 
-    renewTokenUseCase.refreshToken = authResponse.refreshToken;
+    this.renewTokenUseCase.refreshToken = authResponse.refreshToken;
 
     return counters;
   }

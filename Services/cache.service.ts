@@ -10,19 +10,19 @@ import { CacheInterface } from "./cache.interface";
 export class CacheService implements CacheInterface {
   static _cache: KeyValuePair<string, any> = { };
 
-  getValue(key: string){
-    return CacheService._cache[key];
+  getValue<T>(key: KEYS){
+    return CacheService._cache[key] as T;
   };
 
-  setValue(key: string, value: any) {
+  setValue<T>(key: KEYS, value: T) {
     CacheService._cache[key] = value;
   }
 
   setRefreshToken(value: string){
-    CacheService._cache[KEYS.REFRESH_TOKEN] = value;
+    this.setValue(KEYS.REFRESH_TOKEN, value);
   }
 
   getRefreshToken(): string {
-    return CacheService._cache[KEYS.REFRESH_TOKEN];
+    return this.getValue(KEYS.REFRESH_TOKEN);
   }
 }

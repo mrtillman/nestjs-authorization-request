@@ -2,9 +2,11 @@ import * as fetchImport from 'isomorphic-unfetch';
 import { SERVERS } from '../Common/servers';
 import { AuthorizationRequest } from '../Domain/auth-request';
 import querystring = require('querystring');
+import { Injectable } from '@nestjs/common';
 
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default;
 
+@Injectable()
 export class ServiceAgent {
   public token: string;
   

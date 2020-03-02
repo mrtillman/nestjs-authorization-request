@@ -1,3 +1,4 @@
 export enum KEYS {
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
+  ACCESS_TOKEN
 };
