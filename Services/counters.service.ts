@@ -14,7 +14,7 @@ export class CountersService {
     this.agent.token = value;
   }
 
-  public async getCounters(): Promise<Array<Counter>> {   
+  public async getCounters(): Promise<Counter[]> {   
     const res =  await this.agent.fetchCounters();
     if (res.ok) {
       const counters = await res.json();

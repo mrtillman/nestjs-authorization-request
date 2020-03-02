@@ -4,19 +4,17 @@ import { UseCase } from './use-case.interface';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { CacheService } from '../Services/cache.service';
 
-let refreshTokenKey = "refreshToken";
-
 @Injectable()
 export class RenewTokenUseCase implements UseCase<AuthorizationResponse> {
   
   constructor(private readonly secureService : SecureService,
               private readonly cacheService: CacheService) {}
   
-  public set refreshToken(value) {
-    this.cacheService.setValue(refreshTokenKey, value);
+  public set refreshToken(value: string) {
+    this.cacheService.setRefreshToken(value);
   }
   public get refreshToken(): string {
-    return this.cacheService.getValue(refreshTokenKey);
+    return this.cacheService.getRefreshToken();
   };
 
   public async execute(): Promise<AuthorizationResponse> {
