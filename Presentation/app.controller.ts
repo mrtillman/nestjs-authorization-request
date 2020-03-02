@@ -3,13 +3,17 @@ import { Controller, Get, Query, Render, Response } from "@nestjs/common";
 import { GetTokenUseCase } from "../Application/get-token.use-case";
 import { GetCountersUseCase } from "../Application/get-counters.use-case";
 import { RenewTokenUseCase } from "../Application/renew-token.use-case";
+import { CacheService } from "../Services/cache.service";
+import { KEYS } from "../Common/keys.enum";
+import { AuthorizationResponse } from "../Domain/auth-response";
 
 @Controller()
 export class AppController {
   constructor(
     private readonly getTokenUseCase: GetTokenUseCase,
     private readonly getCountersUseCase: GetCountersUseCase,
-    private readonly renewTokenUseCase: RenewTokenUseCase
+    private readonly renewTokenUseCase: RenewTokenUseCase,
+    private readonly cache: CacheService,
   ) {}
 
   @Get("/")
@@ -25,12 +29,18 @@ export class AppController {
     @Query("code") code: string,
     @Query("state") state: string
   ): Promise<any> {
-    // 3. Authorization Grant (outbound)
-    this.getTokenUseCase.code = code;
-    this.getTokenUseCase.state = state;
+    
+    let authResponse: AuthorizationResponse = this.cache.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN);
 
-    // 4. Access Token (inbound)
-    const authResponse = await this.getTokenUseCase.execute();
+    if(!authResponse){
+      // 3. Authorization Grant (outbound)
+      this.getTokenUseCase.code = code;
+      this.getTokenUseCase.state = state;
+
+      // 4. Access Token (inbound)
+      authResponse = await this.getTokenUseCase.execute();
+      this.cache.setValue(KEYS.ACCESS_TOKEN, authResponse);
+    }
 
     // 5. Access Token (outbound)
     this.getCountersUseCase.token = authResponse.accessToken;
