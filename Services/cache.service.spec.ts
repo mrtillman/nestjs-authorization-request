@@ -6,9 +6,14 @@ describe('CacheService', () => {
   beforeEach(() => {
     cache = new CacheService();
   })
-  it('should work', () => {
+  it('should cache access token', () => {
     const access_token = 'letmein'
     cache.setValue(KEYS.ACCESS_TOKEN, access_token);
     expect(cache.getValue(KEYS.ACCESS_TOKEN)).toEqual(access_token);
+  })
+  it('should cache refresh token', () => {
+    const refresh_token = 'wakeup';
+    cache.setRefreshToken(refresh_token);
+    expect(cache.getRefreshToken()).toBe(refresh_token);
   })
 })

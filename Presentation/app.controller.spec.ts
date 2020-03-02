@@ -3,6 +3,7 @@ import { AppController } from "./app.controller";
 import { CountersModule } from "./counters.module";
 import { SecureModule } from "./secure.module";
 import { AuthorizationUrlRegExp } from "../Common/auth-url.reg-exp";
+import { CacheService } from "../Services/cache.service";
 
 describe("AppController", () => {
   let appController: AppController;
@@ -11,6 +12,7 @@ describe("AppController", () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [CountersModule, SecureModule],
+      providers: [CacheService],
       controllers: [AppController]
     }).compile();
 
