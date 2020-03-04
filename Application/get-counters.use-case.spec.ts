@@ -1,6 +1,6 @@
 import { GetCountersUseCase } from './get-counters.use-case';
 import { Mock } from 'moq.ts';
-import { CountersService } from 'Services/counters.service';
+import { CounterService } from 'Services/counter.service';
 
 // TODO: consolidate test doubles
 const token = "t0k3n";
@@ -25,8 +25,9 @@ const counters = [
   }
 ];
 
-const countersService = new Mock<CountersService>();
-countersService.setup(service => service.token).returns(token);
+const countersService = new Mock<CounterService>();
+countersService.setup(service => service.token)
+               .returns(token);
 countersService.setup(service => service.getCounters())
                .returns(counters);
 

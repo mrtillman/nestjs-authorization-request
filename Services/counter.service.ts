@@ -3,7 +3,7 @@ import { ServiceAgent } from '../Infrastructure/service-agent';
 import { Counter } from '../Domain/counter';
 
 @Injectable()
-export class CountersService {
+export class CounterService {
 
   constructor(private readonly agent: ServiceAgent){}
 

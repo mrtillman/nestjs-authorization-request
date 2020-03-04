@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
-import { CountersService } from "../Services/counters.service";
+import { CounterService } from "../Services/counter.service";
 import { GetCountersUseCase } from "../Application/get-counters.use-case";
 import { ServiceAgent } from "../Infrastructure/service-agent";
 
 @Module({
-  providers: [ServiceAgent, CountersService, GetCountersUseCase],
+  providers: [ServiceAgent, CounterService, GetCountersUseCase],
   exports: [GetCountersUseCase]
 })
 export class CountersModule {}
