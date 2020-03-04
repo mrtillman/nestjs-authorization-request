@@ -1,4 +1,4 @@
-import { KeyValuePair } from "Domain/key-value-pair";
+import { KeyValuePair } from "../Domain/key-value-pair";
 import { Injectable } from '@nestjs/common';
 import { KEYS } from "../Common/keys.enum";
 import { CacheInterface } from "./cache.interface";
