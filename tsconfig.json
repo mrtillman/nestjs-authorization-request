@@ -8,7 +8,6 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./Release",
-    "baseUrl": "./",
     "incremental": true
   },
   "exclude": ["node_modules", "Release"]
