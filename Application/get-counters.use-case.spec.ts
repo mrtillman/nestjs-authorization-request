@@ -1,35 +1,15 @@
 import { GetCountersUseCase } from './get-counters.use-case';
 import { Mock } from 'moq.ts';
 import { CounterService } from '../Services/counter.service';
+import { counters, token } from '../Common/TestDoubles/stubs';
+import { Result } from '../Common/result';
 
-// TODO: consolidate test doubles
-const token = "t0k3n";
-const counters = [
-  {
-    "_id": "5e3691dda2de8e05241a60a5",
-    "name": "alcohol",
-    "value": 0,
-    "skip": 1
-  },
-  {
-    "_id": "5e3691dda2de8e05241a60a6",
-    "name": "tobacco",
-    "value": 0,
-    "skip": 1
-  },
-  {
-    "_id": "5e3691dda2de8e05241a60a7",
-    "name": "firearms",
-    "value": 0,
-    "skip": 1
-  }
-];
-
+// TODO: use mock factory
 const countersServiceMock = new Mock<CounterService>();
 countersServiceMock.setup(service => service.token)
                    .returns(token);
 countersServiceMock.setup(service => service.getCounters())
-                   .returns(counters);
+                   .returns(Result.Ok(counters));
 
 describe('GetCountersUseCase', () => {
   let useCase : GetCountersUseCase;

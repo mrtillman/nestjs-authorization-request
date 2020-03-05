@@ -5,22 +5,9 @@ import { SecureService } from '../Services/secure.service';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { KEYS } from '../Common/keys.enum';
 import { Result } from '../Common/result';
+import { authResponse, authorizationUrl, code, state } from '../Common/TestDoubles/stubs';
 
-// TODO: consolidate test doubles
-const token = "t0k3n";
-const refreshToken = "r3fr3$ht0k3n";
-const authorizationUrl = "@uth0r1z@ti0nUrl";
-const authResponse = {
-  accessToken: token,
-  expiresIn: Date.now.toString(),
-  refreshToken: refreshToken,
-  scope: "openid",
-  tokenType: "bearer"
-} as AuthorizationResponse;
-const code = "@uth0r1z@ti0nc0d3";
-const state = "5t@t3";
-
-// TODO: use mock factory to clean up tests
+// TODO: use mock factory; clean up tests
 describe('GetTokenUseCase', () => {
   it('should get authorization response', () => {
     let useCase : GetTokenUseCase;
@@ -31,6 +18,8 @@ describe('GetTokenUseCase', () => {
                     .returns(authorizationUrl);
     const cacheServiceMock = new Mock<CacheService>();
     cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
+                    .returns(null)
+                    .setup(service => service.setValue(It.IsAny<KEYS>(), It.IsAny<any>()))
                     .returns(null);
     useCase = new GetTokenUseCase(secureServiceMock.object(), cacheServiceMock.object());
     useCase.code = code;
