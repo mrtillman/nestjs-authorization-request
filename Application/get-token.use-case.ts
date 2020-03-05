@@ -19,13 +19,16 @@ export class GetTokenUseCase implements UseCase<AuthorizationResponse> {
   }
 
   public async execute(): Promise<AuthorizationResponse> {
-    let authResponse = this.cache.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN);
+    let authResponse: AuthorizationResponse = this.cache.getValue(KEYS.ACCESS_TOKEN);
     if(authResponse){
       return authResponse;
     }
     const result = await this.secureService.getToken(this.code, this.state);
-    authResponse = result.Value;
-    this.cache.setValue(KEYS.ACCESS_TOKEN, authResponse);
-    return authResponse;
+    if(result.DidSucceed){
+      const authResponse = result.Value;
+      this.cache.setValue(KEYS.ACCESS_TOKEN, authResponse);
+      return authResponse;
+    }
+    throw new Error(result.ErrorMessage);
   }
 }

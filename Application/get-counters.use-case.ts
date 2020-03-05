@@ -15,7 +15,11 @@ export class GetCountersUseCase implements UseCase<Array<Counter>> {
     this.countersService.token = value;
   }
 
-  public async execute(): Promise<Array<Counter>> {
-    return await this.countersService.getCounters();
+  public async execute(): Promise<Counter[]> {
+    const result = await this.countersService.getCounters();
+    if(result.DidSucceed){
+      return result.Value;
+    }
+    throw new Error(result.ErrorMessage);
   }
 }

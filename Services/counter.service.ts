@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ServiceAgent } from '../Infrastructure/service-agent';
 import { Counter } from '../Domain/counter';
+import { Result } from '../Common/result';
 
 @Injectable()
 export class CounterService {
@@ -14,17 +15,18 @@ export class CounterService {
     this.agent.token = value;
   }
 
-  public async getCounters(): Promise<Counter[]> {   
+  public async getCounters(): Promise<Result<Counter[]>> {
     const res =  await this.agent.fetchCounters();
     if (res.ok) {
-      const counters = await res.json();
-      return Array.from(counters, (counter: Counter) => ({
+      const countersResponse = await res.json();
+      const counters = Array.from(countersResponse, (counter: Counter) => ({
         _id: counter._id,
         name: counter.name,
         value: counter.value,
         skip: counter.skip,
       }));
+      return Result.Ok(counters);
     }
-    throw new Error(res.statusText);
+    return Result.Fail(res.statusText);
   }
 }
