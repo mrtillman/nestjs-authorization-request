@@ -17,24 +17,41 @@ const authResponse = {
   scope: "openid",
   tokenType: "bearer"
 } as AuthorizationResponse;
+const code = "@uth0r1z@ti0nc0d3";
+const state = "5t@t3";
 
-const secureServiceMock = new Mock<SecureService>();
-secureServiceMock.setup(service => service.getToken(It.IsAny<string>(), It.IsAny<string>()))
-                 .returns(Result.Ok(authResponse))
-                 .setup(service => service.authorizationUrl)
-                 .returns(authorizationUrl);
-const cacheServiceMock = new Mock<CacheService>();
-cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
-                .returns(authResponse);
-
+// TODO: use mock factory to clean up tests
 describe('GetTokenUseCase', () => {
-  let useCase : GetTokenUseCase;
-  beforeEach(() => {
-    useCase = new GetTokenUseCase(secureServiceMock.object(), cacheServiceMock.object());
-  })
   it('should get authorization response', () => {
-    useCase.code = "authorization code";
-    useCase.state = "$t@t3";
+    let useCase : GetTokenUseCase;
+    const secureServiceMock = new Mock<SecureService>();
+    secureServiceMock.setup(service => service.getToken(It.IsAny<string>(), It.IsAny<string>()))
+                    .returns(Result.Ok(authResponse))
+                    .setup(service => service.authorizationUrl)
+                    .returns(authorizationUrl);
+    const cacheServiceMock = new Mock<CacheService>();
+    cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
+                    .returns(null);
+    useCase = new GetTokenUseCase(secureServiceMock.object(), cacheServiceMock.object());
+    useCase.code = code;
+    useCase.state = state;
+    const response = useCase.execute();
+    expect(response).toBeDefined();
+    secureServiceMock.verify(service => service.getToken(It.IsAny<string>(), It.IsAny<string>()));
+  })
+  it('should get authorization response from cache', () => {
+    let useCase : GetTokenUseCase;
+    const secureServiceMock = new Mock<SecureService>();
+    secureServiceMock.setup(service => service.getToken(It.IsAny<string>(), It.IsAny<string>()))
+                    .returns(Result.Ok(authResponse))
+                    .setup(service => service.authorizationUrl)
+                    .returns(authorizationUrl);
+    const cacheServiceMock = new Mock<CacheService>();
+    cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
+                    .returns(authResponse);
+    useCase = new GetTokenUseCase(secureServiceMock.object(), cacheServiceMock.object());
+    useCase.code = code;
+    useCase.state = state;
     const response = useCase.execute();
     expect(response).toBeDefined();
   })
