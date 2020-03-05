@@ -13,7 +13,7 @@ export class AppController {
     private readonly getTokenUseCase: GetTokenUseCase,
     private readonly getCountersUseCase: GetCountersUseCase,
     private readonly renewTokenUseCase: RenewTokenUseCase,
-    private readonly cache: CacheService,
+    private readonly cache: CacheService
   ) {}
 
   @Get("/")
@@ -29,10 +29,11 @@ export class AppController {
     @Query("code") code: string,
     @Query("state") state: string
   ): Promise<any> {
-    
-    let authResponse: AuthorizationResponse = this.cache.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN);
+    let authResponse: AuthorizationResponse = this.cache.getValue<
+      AuthorizationResponse
+    >(KEYS.ACCESS_TOKEN);
 
-    if(!authResponse){
+    if (!authResponse) {
       // 3. Authorization Grant (outbound)
       this.getTokenUseCase.code = code;
       this.getTokenUseCase.state = state;

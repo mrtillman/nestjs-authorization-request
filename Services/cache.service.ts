@@ -8,14 +8,14 @@ import { CacheInterface } from "./cache.interface";
 
 @Injectable()
 export class CacheService implements CacheInterface {
-  static _cache: KeyValuePair<string, any> = { };
+  static self: KeyValuePair<string, any> = { };
 
   getValue<T>(key: KEYS){
-    return CacheService._cache[key] as T;
+    return CacheService.self[key] as T;
   };
 
   setValue<T>(key: KEYS, value: T) {
-    CacheService._cache[key] = value;
+    CacheService.self[key] = value;
   }
 
   setRefreshToken(value: string){

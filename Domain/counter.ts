@@ -1,6 +1,6 @@
 export class Counter {
-  public _id: Number;
-  public name: String;
-  public value: Number;
-  public skip: Number;
+  public _id: number;
+  public name: string;
+  public value: number;
+  public skip: number;
 }

@@ -81,8 +81,8 @@ export class SecureService {
         tokenType: data.token_type,
         refreshToken: data.refresh_token
       };
-      return Result.Ok<AuthorizationResponse>(authResponse);
+      return Result.Ok(authResponse);
     }
-    return Result.Fail<AuthorizationResponse>(res.statusText);
+    return Result.Fail(res.statusText);
   }
 }
