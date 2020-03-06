@@ -3,6 +3,7 @@ import { SecureService } from '../Services/secure.service';
 import { UseCase } from './use-case.interface';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { CacheService } from '../Services/cache.service';
+import { KEYS } from '../Common/keys.enum';
 
 @Injectable()
 export class RenewTokenUseCase implements UseCase<AuthorizationResponse> {
@@ -11,10 +12,10 @@ export class RenewTokenUseCase implements UseCase<AuthorizationResponse> {
               private readonly cacheService: CacheService) {}
   
   public set refreshToken(value: string) {
-    this.cacheService.setRefreshToken(value);
+    this.cacheService.setValue(KEYS.REFRESH_TOKEN, value);
   }
   public get refreshToken(): string {
-    return this.cacheService.getRefreshToken();
+    return this.cacheService.getValue(KEYS.REFRESH_TOKEN);
   };
 
   public async execute(): Promise<AuthorizationResponse> {

@@ -1,5 +1,6 @@
 import { CacheService } from './cache.service';
 import { KEYS } from '../Common/keys.enum';
+import { token, refreshToken } from '../Common/TestDoubles/stubs';
 
 describe('CacheService', () => {
   let cache : CacheService;
@@ -7,13 +8,11 @@ describe('CacheService', () => {
     cache = new CacheService();
   })
   it('should cache access token', () => {
-    const access_token = 'letmein'
-    cache.setValue(KEYS.ACCESS_TOKEN, access_token);
-    expect(cache.getValue(KEYS.ACCESS_TOKEN)).toEqual(access_token);
+    cache.setValue(KEYS.ACCESS_TOKEN, token);
+    expect(cache.getValue(KEYS.ACCESS_TOKEN)).toEqual(token);
   })
   it('should cache refresh token', () => {
-    const refresh_token = 'wakeup';
-    cache.setRefreshToken(refresh_token);
-    expect(cache.getRefreshToken()).toBe(refresh_token);
+    cache.setValue(KEYS.REFRESH_TOKEN, refreshToken);
+    expect(cache.getValue(KEYS.REFRESH_TOKEN)).toBe(refreshToken);
   })
 })
