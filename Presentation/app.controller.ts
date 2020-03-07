@@ -29,9 +29,7 @@ export class AppController {
     @Query("code") code: string,
     @Query("state") state: string
   ): Promise<any> {
-    let authResponse: AuthorizationResponse = this.cache.getValue<
-      AuthorizationResponse
-    >(KEYS.ACCESS_TOKEN);
+    let authResponse: AuthorizationResponse = this.cache.getValue(KEYS.ACCESS_TOKEN);
 
     if (!authResponse) {
       // 3. Authorization Grant (outbound)
