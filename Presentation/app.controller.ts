@@ -4,7 +4,7 @@ import { GetTokenUseCase } from "../Application/get-token.use-case";
 import { GetCountersUseCase } from "../Application/get-counters.use-case";
 import { RenewTokenUseCase } from "../Application/renew-token.use-case";
 import { CacheService } from "../Services/cache.service";
-import { KEYS } from "../Common/keys.enum";
+import { KEY } from "../Common/keys.enum";
 import { AuthorizationResponse } from "../Domain/auth-response";
 
 @Controller()
@@ -31,7 +31,7 @@ export class AppController {
   ): Promise<any> {
     let authResponse: AuthorizationResponse = this.cache.getValue<
       AuthorizationResponse
-    >(KEYS.ACCESS_TOKEN);
+    >(KEY.ACCESS_TOKEN);
 
     if (!authResponse) {
       // 3. Authorization Grant (outbound)
@@ -40,7 +40,7 @@ export class AppController {
 
       // 4. Access Token (inbound)
       authResponse = await this.getTokenUseCase.execute();
-      this.cache.setValue(KEYS.ACCESS_TOKEN, authResponse);
+      this.cache.setValue(KEY.ACCESS_TOKEN, authResponse);
     }
 
     // 5. Access Token (outbound)

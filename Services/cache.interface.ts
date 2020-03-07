@@ -1,7 +1,8 @@
-import { KEYS } from "../Common/keys.enum";
+import { KEY } from "../Common/keys.enum";
 
 export interface CacheInterface {
   clear();
-  getValue<T>(key: KEYS): T;
-  setValue<T>(key: KEYS, value: T);
+  remove(key: KEY);
+  getValue<T>(key: KEY): T;
+  setValue<T>(key: KEY, value: T);
 }
