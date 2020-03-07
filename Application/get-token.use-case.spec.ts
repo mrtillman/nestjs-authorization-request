@@ -3,7 +3,7 @@ import { Mock, It } from 'moq.ts';
 import { CacheService } from '../Services/cache.service';
 import { SecureService } from '../Services/secure.service';
 import { AuthorizationResponse } from '../Domain/auth-response';
-import { KEY } from '../Common/keys.enum';
+import { KEYS } from '../Common/keys.enum';
 import { Result } from '../Common/result';
 import { authResponse, authorizationUrl, code, state } from '../Common/TestDoubles/stubs';
 
@@ -17,9 +17,9 @@ describe('GetTokenUseCase', () => {
                     .setup(service => service.authorizationUrl)
                     .returns(authorizationUrl);
     const cacheServiceMock = new Mock<CacheService>();
-    cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEY.ACCESS_TOKEN))
+    cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
                     .returns(null)
-                    .setup(service => service.setValue(It.IsAny<KEY>(), It.IsAny<any>()))
+                    .setup(service => service.setValue(It.IsAny<KEYS>(), It.IsAny<any>()))
                     .returns(null);
     useCase = new GetTokenUseCase(secureServiceMock.object(), cacheServiceMock.object());
     useCase.code = code;
@@ -36,7 +36,7 @@ describe('GetTokenUseCase', () => {
                     .setup(service => service.authorizationUrl)
                     .returns(authorizationUrl);
     const cacheServiceMock = new Mock<CacheService>();
-    cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEY.ACCESS_TOKEN))
+    cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
                     .returns(authResponse);
     useCase = new GetTokenUseCase(secureServiceMock.object(), cacheServiceMock.object());
     useCase.code = code;

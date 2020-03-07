@@ -1,6 +1,6 @@
 import { KeyValuePair } from "../Domain/key-value-pair";
 import { Injectable } from '@nestjs/common';
-import { KEY } from "../Common/keys.enum";
+import { KEYS } from "../Common/keys.enum";
 import { CacheInterface } from "./cache.interface";
 
 // TODO: consume Redis client
@@ -14,15 +14,11 @@ export class CacheService implements CacheInterface {
     CacheService.self = {}
   }
   
-  remove(key: KEY){
-    delete CacheService.self[key];
-  }
-
-  getValue<T>(key: KEY){
+  getValue<T>(key: KEYS){
     return CacheService.self[key] as T;
   };
 
-  setValue<T>(key: KEY, value: T) {
+  setValue<T>(key: KEYS, value: T) {
     CacheService.self[key] = value;
   }
 }
