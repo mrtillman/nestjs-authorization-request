@@ -60,7 +60,7 @@ $ npm run test:spec
 
 Open http://counter-culture:8080 to view it in the browser. You can sign in using one of the [demo accounts](https://github.com/mrtillman/counter-culture.secure/blob/master/README.md#usage).
 
-To flex the token refresh logic, visit http://counter-culture:8080/renewtoken.
+To exercise the token refresh logic, visit http://counter-culture:8080/renewtoken.
 
 ## License
 
