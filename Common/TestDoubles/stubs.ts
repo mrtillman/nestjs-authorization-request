@@ -26,7 +26,7 @@ export const authorizationUrl = "@uth0r1z@ti0nUrl";
 export const authResponse = {
   accessToken: token,
   expiresIn: Date.now.toString(),
-  refreshToken: refreshToken,
+  refreshToken,
   scope: "openid",
   tokenType: "bearer"
 } as AuthorizationResponse;
