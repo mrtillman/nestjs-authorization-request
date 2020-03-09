@@ -4,7 +4,7 @@ import { authRequest, refreshTokenRequest, token } from '../Common/TestDoubles/s
 
 mockHttpRequests();
 
-describe('HttpShim', () => {
+describe('ServiceAgent', () => {
   let agent : ServiceAgent;
   beforeEach(() => {
     agent = new ServiceAgent();
