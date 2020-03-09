@@ -4,17 +4,16 @@ import { CounterService } from '../Services/counter.service';
 import { counters, token } from '../Common/TestDoubles/stubs';
 import { Result } from '../Common/result';
 
-// TODO: use mock factory
-const countersServiceMock = new Mock<CounterService>();
-countersServiceMock.setup(service => service.token)
+const counterServiceMock = new Mock<CounterService>();
+counterServiceMock.setup(service => service.token)
                    .returns(token);
-countersServiceMock.setup(service => service.getCounters())
+counterServiceMock.setup(service => service.getCounters())
                    .returns(Result.Ok(counters));
 
 describe('GetCountersUseCase', () => {
   let useCase : GetCountersUseCase;
   beforeEach(() => {    
-    useCase = new GetCountersUseCase(countersServiceMock.object());
+    useCase = new GetCountersUseCase(counterServiceMock.object());
   })
   it('should get counters', async () => {
     useCase.token = token;
