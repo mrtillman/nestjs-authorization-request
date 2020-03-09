@@ -1,4 +1,5 @@
 import { AuthorizationResponse } from '../../Domain/auth-response';
+import { AuthorizationRequest } from '../../Domain/auth-request';
 
 export const token = "t0k3n";
 export const counters = [
@@ -23,6 +24,20 @@ export const counters = [
 ];
 export const refreshToken = "r3fr3$ht0k3n";
 export const authorizationUrl = "@uth0r1z@ti0nUrl";
+export const authRequest = {
+  code: '123',
+  redirectUri: 'https://example-app.com/callback',
+  clientId: 'a545f608-6583-4bb8-91b9-dbdfdae3dd3e',
+  clientSecret: 'e572ba00-6195-11ea-bc55-0242ac130003',
+  scope: 'openid',
+  grantType: 'authorization_code'
+} as AuthorizationRequest
+export const refreshTokenRequest = {
+  clientId: 'a545f608-6583-4bb8-91b9-dbdfdae3dd3e',
+  clientSecret: 'e572ba00-6195-11ea-bc55-0242ac130003',
+  grantType: 'authorization_code',
+  refreshToken,
+}
 export const authResponse = {
   accessToken: token,
   expiresIn: Date.now.toString(),
