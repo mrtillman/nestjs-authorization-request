@@ -1,18 +1,26 @@
-import { Test } from '@nestjs/testing';
 import { CounterService } from './counter.service';
 import { ServiceAgent } from '../Infrastructure/service-agent';
+import { Mock } from 'moq.ts';
+import { counters } from '../Common/TestDoubles/stubs';
+
+const agentMock = new Mock<ServiceAgent>();
+
+agentMock.setup(agent => agent.fetchCounters())
+         .returns({
+           ok: true,
+           json: () => counters
+         });
 
 describe('CountersService', () => {
   let service: CounterService;
 
-  beforeEach(async () => {
-    const module = await Test.createTestingModule({
-      providers: [ServiceAgent, CounterService]
-    }).compile();
-    service = module.get<CounterService>(CounterService)
+  beforeEach(() => {
+    service = new CounterService(agentMock.object());
   })
 
-  it('should work', () => {
-    expect(service.getCounters).toBeDefined();
+  it('should get counters', () => {
+    const result = service.getCounters();
+    
+    expect(result).toBeDefined();
   })
 })
