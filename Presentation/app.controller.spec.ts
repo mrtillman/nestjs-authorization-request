@@ -10,6 +10,7 @@ describe("AppController", () => {
   let authUrlRegExp: AuthorizationUrlRegExp;
 
   beforeEach(async () => {
+    // TODO: mock dependencies
     const app: TestingModule = await Test.createTestingModule({
       imports: [CountersModule, SecureModule],
       providers: [CacheService],
@@ -20,19 +21,26 @@ describe("AppController", () => {
     authUrlRegExp = new AuthorizationUrlRegExp();
   });
 
-  describe("index", () => {
-    it("should return view model", () => {
+  describe("/index", () => {
+    it("should get authorization url", () => {
       const model = appController.index();
-      expect(model).toBeDefined();
-    });
-    it("view model should have authorization url", () => {
-      const model = appController.index();
-      expect(model.authorizationUrl).toBeDefined();
-    });
-    it("authorization url should not be malformed", () => {
-      const model = appController.index();
-      const isMalformed = !authUrlRegExp.test(model.authorizationUrl);
-      expect(isMalformed).toBe(false);
+      const isValidAuthUrl = !authUrlRegExp.test(model.authorizationUrl);
+      expect(isValidAuthUrl).toBe(false);
     });
   });
+
+  describe("/oauth2/callback", () => {
+    it("should get counters", () => {
+      expect(true).toBe(true);
+    });
+  })
+
+  describe("/renewtoken", () => {
+    it("should get authorization response", () => {
+      expect(true).toBe(true);
+    });
+    it("should redirect if no authorization response", () => {
+      expect(true).toBe(true);
+    });
+  })
 });
