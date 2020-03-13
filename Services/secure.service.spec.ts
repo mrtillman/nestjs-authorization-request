@@ -1,10 +1,10 @@
+import querystring = require('querystring');
 import { SecureService } from './secure.service';
 import { ServiceAgent } from '../Infrastructure/service-agent';
 import { ConfigService } from './config.service';
 import { Mock, It } from 'moq.ts';
 import { authRequest, authResponse, code, refreshToken } from '../Common/TestDoubles/stubs';
 import { AuthorizationUrlRegExp } from '../Common/auth-url.reg-exp';
-import querystring = require('querystring');
 import { AuthorizationRequest } from '../Domain/auth-request';
 
 const agentMock = new Mock<ServiceAgent>();
