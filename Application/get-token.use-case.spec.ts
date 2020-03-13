@@ -6,6 +6,7 @@ import { AuthorizationResponse } from '../Domain/auth-response';
 import { KEYS } from '../Common/keys.enum';
 import { Result } from '../Common/result';
 import { authResponse, authorizationUrl, code, state } from '../Common/TestDoubles/stubs';
+import { called } from '../Common/test-helpers';
 
 let secureServiceMock: Mock<SecureService>;
 let cacheServiceMock: Mock<CacheService>;
@@ -25,10 +26,6 @@ const mockSecureService = (): Mock<SecureService> => {
                    .returns(authorizationUrl);
   return secureServiceMock;
 }
-
-const called = (callCount: number): Times => (
-  new Times(expected => expected === callCount, `Should be called ${callCount} times`)
-);
 
 describe('GetTokenUseCase', () => {
   beforeEach(() => {
