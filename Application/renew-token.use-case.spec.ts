@@ -33,10 +33,10 @@ describe('RenewTokenUseCase', () => {
   })
   it('should update refresh token', async () => {
     const newAuthResponse = Object.create(authResponse) as AuthorizationResponse;
-    newAuthResponse.refreshToken = `new${refreshToken}`;
+    newAuthResponse.refresh_token = `new${refreshToken}`;
     cacheServiceMock
       .setup(service => service.getValue(KEYS.REFRESH_TOKEN))
-      .returns(authResponse.refreshToken)
+      .returns(authResponse.refresh_token)
       .setup(service => service.setValue(KEYS.REFRESH_TOKEN, It.IsAny<any>()))
       .returns(null);
     secureServiceMock
@@ -48,6 +48,6 @@ describe('RenewTokenUseCase', () => {
     const response = await useCase.execute();
 
     expect(response).toBeDefined();
-    expect(response.refreshToken).toBe(newAuthResponse.refreshToken);
+    expect(response.refresh_token).toBe(newAuthResponse.refresh_token);
   })
 })

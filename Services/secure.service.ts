@@ -75,11 +75,11 @@ export class SecureService {
     if (res.ok) {
       const data = await res.json();
       const authResponse : AuthorizationResponse = {
-        accessToken: data.access_token,
-        expiresIn: data.expires_in,
+        access_token: data.access_token,
+        expires_in: data.expires_in,
         scope: data.scope,
-        tokenType: data.token_type,
-        refreshToken: data.refresh_token
+        token_type: data.token_type,
+        refresh_token: data.refresh_token
       };
       return Result.Ok(authResponse);
     }

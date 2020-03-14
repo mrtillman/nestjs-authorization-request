@@ -22,7 +22,7 @@ export class RenewTokenUseCase implements UseCase<AuthorizationResponse> {
     if(!this.refreshToken) return null;
     const result = await this.secureService.renewToken(this.refreshToken);
     if(result.DidSucceed){
-      this.refreshToken = result.Value.refreshToken;
+      this.refreshToken = result.Value.refresh_token;
       return result.Value;
     }
     throw new Error(result.ErrorMessage);

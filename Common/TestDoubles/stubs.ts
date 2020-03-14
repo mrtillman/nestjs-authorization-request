@@ -39,11 +39,11 @@ export const refreshTokenRequest = {
   refreshToken,
 }
 export const authResponse = {
-  accessToken: token,
-  expiresIn: Date.now.toString(),
-  refreshToken,
+  access_token: token,
+  expires_in: Date.now.toString(),
+  refresh_token: refreshToken,
   scope: "openid",
-  tokenType: "bearer"
+  token_type: "bearer"
 } as AuthorizationResponse;
 export const code = "@uth0r1z@ti0nc0d3";
 export const state = "5t@t3";

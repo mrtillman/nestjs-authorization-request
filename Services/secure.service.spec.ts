@@ -12,11 +12,11 @@ const agentMock = new Mock<ServiceAgent>();
 const mockTokenResponse = {
   ok: true,
   json: () => ({
-    access_token: authResponse.accessToken,
-    expires_in: authResponse.expiresIn,
+    access_token: authResponse.access_token,
+    expires_in: authResponse.expires_in,
     scope: authResponse.scope,
-    token_type: authResponse.tokenType,
-    refresh_toke: authResponse.refreshToken
+    token_type: authResponse.token_type,
+    refresh_toke: authResponse.refresh_token
   })
 };
 

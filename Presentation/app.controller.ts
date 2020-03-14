@@ -44,12 +44,12 @@ export class AppController {
     }
 
     // 5. Access Token (outbound)
-    this.getCountersUseCase.token = authResponse.accessToken;
+    this.getCountersUseCase.token = authResponse.access_token;
 
     // 6. Protected Resource
     const counters = await this.getCountersUseCase.execute();
 
-    this.renewTokenUseCase.refreshToken = authResponse.refreshToken;
+    this.renewTokenUseCase.refreshToken = authResponse.refresh_token;
 
     return counters;
   }
