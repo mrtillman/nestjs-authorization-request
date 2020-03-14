@@ -12,8 +12,8 @@ import { AuthorizationResponse } from "../Domain/auth-response";
 import { Response } from "express";
 import { called } from "../Common/test-helpers";
 
-const getTokenUseCaseMock = new Mock<GetTokenUseCase>();
-const getCountersUseCaseMock = new Mock<GetCountersUseCase>();
+export const getTokenUseCaseMock = new Mock<GetTokenUseCase>();
+export const getCountersUseCaseMock = new Mock<GetCountersUseCase>();
 const cacheMock = new Mock<CacheService>();
 
 let renewTokenUseCaseMock = new Mock<RenewTokenUseCase>();
