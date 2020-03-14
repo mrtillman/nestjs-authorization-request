@@ -1,11 +1,11 @@
 const { setWorldConstructor, Given, When, Then } = require('cucumber');
-const GetCountersFeature = require('../get-counters.feature');
+const World = require('../../world');
 const expect = require('expect');
 
-setWorldConstructor(GetCountersFeature);
+setWorldConstructor(World);
 
 Given("an access token", function() {
-  this.usecase.token = "TokenValue";
+  this.usecase.token = "access_token";
 });
 
 When("I request counters", async function() {
