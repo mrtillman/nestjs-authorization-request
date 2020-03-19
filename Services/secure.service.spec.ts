@@ -3,7 +3,7 @@ import { SecureService } from './secure.service';
 import { ServiceAgent } from '../Infrastructure/service-agent';
 import { ConfigService } from './config.service';
 import { Mock, It } from 'moq.ts';
-import { authRequest, authResponse, code, refreshToken } from '../Common/TestDoubles/stubs';
+import { authRequest, authResponse, code, refreshToken } from '../Common/test-doubles';
 import { AuthorizationUrlRegExp } from '../Common/auth-url.reg-exp';
 import { AuthorizationRequest } from '../Domain/auth-request';
 

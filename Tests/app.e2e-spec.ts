@@ -6,7 +6,7 @@ import { GetCountersUseCase } from "../Application/get-counters.use-case";
 import { RenewTokenUseCase } from "../Application/renew-token.use-case";
 import { join } from "path";
 import { Mock } from "moq.ts";
-import { authResponse, counters } from "../Common/TestDoubles/stubs";
+import { authResponse, counters } from "../Common/test-doubles";
 
 describe("AppController (e2e)", () => {
   let app;

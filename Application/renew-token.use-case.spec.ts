@@ -2,7 +2,7 @@ import { Mock, It } from 'moq.ts';
 import { RenewTokenUseCase } from './renew-token.use-case';
 import { SecureService } from '../Services/secure.service';
 import { CacheService } from '../Services/cache.service';
-import { refreshToken, authResponse } from '../Common/TestDoubles/stubs';
+import { refreshToken, authResponse } from '../Common/test-doubles';
 import { KEYS } from '../Common/keys.enum';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { Result } from '../Common/result';

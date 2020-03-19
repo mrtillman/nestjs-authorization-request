@@ -6,7 +6,7 @@ import { Mock, It } from "moq.ts";
 import { GetTokenUseCase } from "../Application/get-token.use-case";
 import { GetCountersUseCase } from "../Application/get-counters.use-case";
 import { RenewTokenUseCase } from "../Application/renew-token.use-case";
-import { code, counters, authResponse } from "../Common/TestDoubles/stubs";
+import { code, counters, authResponse } from "../Common/test-doubles";
 import { KEYS } from "../Common/keys.enum";
 import { AuthorizationResponse } from "../Domain/auth-response";
 import { Response } from "express";

@@ -1,7 +1,7 @@
 import { CounterService } from './counter.service';
 import { ServiceAgent } from '../Infrastructure/service-agent';
 import { Mock } from 'moq.ts';
-import { counters } from '../Common/TestDoubles/stubs';
+import { counters } from '../Common/test-doubles';
 
 const agentMock = new Mock<ServiceAgent>();
 

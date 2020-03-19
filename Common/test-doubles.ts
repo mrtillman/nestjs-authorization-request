@@ -1,7 +1,18 @@
-import { AuthorizationResponse } from '../../Domain/auth-response';
-import { AuthorizationRequest } from '../../Domain/auth-request';
+import { AuthorizationResponse } from '../Domain/auth-response';
+import { AuthorizationRequest } from '../Domain/auth-request';
+import { v1 as guid } from 'uuid';
+import { SERVERS } from './servers';
 
-export const token = "t0k3n";
+export const token = guid();
+export const clientId = guid();
+export const clientSecret = guid();
+export const refreshToken = guid();
+export const code = guid();
+export const state = guid();
+
+export const authorizationUrl = `${SERVERS.SECURE}/connect/authorize`;
+export const redirectUri = `${SERVERS.API}/oauth2/callback`;
+
 export const counters = [
   {
     "_id": "5e3691dda2de8e05241a60a5",
@@ -22,19 +33,17 @@ export const counters = [
     "skip": 1
   }
 ];
-export const refreshToken = "r3fr3$ht0k3n";
-export const authorizationUrl = "@uth0r1z@ti0nUrl";
 export const authRequest = {
-  code: '123',
-  redirectUri: 'https://example-app.com/callback',
-  clientId: 'a545f608-6583-4bb8-91b9-dbdfdae3dd3e',
-  clientSecret: 'e572ba00-6195-11ea-bc55-0242ac130003',
+  code: guid(),
+  redirectUri,
+  clientId,
+  clientSecret,
   scope: 'openid',
   grantType: 'authorization_code'
 } as AuthorizationRequest
 export const refreshTokenRequest = {
-  clientId: 'a545f608-6583-4bb8-91b9-dbdfdae3dd3e',
-  clientSecret: 'e572ba00-6195-11ea-bc55-0242ac130003',
+  clientId,
+  clientSecret,
   grantType: 'authorization_code',
   refreshToken,
 }
@@ -45,5 +54,3 @@ export const authResponse = {
   scope: "openid",
   token_type: "bearer"
 } as AuthorizationResponse;
-export const code = "@uth0r1z@ti0nc0d3";
-export const state = "5t@t3";

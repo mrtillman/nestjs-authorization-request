@@ -1,7 +1,7 @@
 import { GetCountersUseCase } from './get-counters.use-case';
 import { Mock } from 'moq.ts';
 import { CounterService } from '../Services/counter.service';
-import { counters, token } from '../Common/TestDoubles/stubs';
+import { counters, token } from '../Common/test-doubles';
 import { Result } from '../Common/result';
 
 const counterServiceMock = new Mock<CounterService>();

@@ -5,7 +5,7 @@ import { SecureService } from '../Services/secure.service';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { KEYS } from '../Common/keys.enum';
 import { Result } from '../Common/result';
-import { authResponse, authorizationUrl, code, state } from '../Common/TestDoubles/stubs';
+import { authResponse, authorizationUrl, code, state } from '../Common/test-doubles';
 import { called } from '../Common/test-helpers';
 
 let secureServiceMock: Mock<SecureService>;

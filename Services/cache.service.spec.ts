@@ -1,6 +1,6 @@
 import { CacheService } from './cache.service';
 import { KEYS } from '../Common/keys.enum';
-import { token, refreshToken } from '../Common/TestDoubles/stubs';
+import { token, refreshToken } from '../Common/test-doubles';
 
 describe('CacheService', () => {
   let cache : CacheService;
