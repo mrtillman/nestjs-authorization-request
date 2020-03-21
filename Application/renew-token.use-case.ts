@@ -20,7 +20,9 @@ export class RenewTokenUseCase implements UseCase<Result<AuthorizationResponse>>
   };
 
   public async execute(): Promise<Result<AuthorizationResponse>> {
-    if(!this.refreshToken) return Result.Fail<AuthorizationResponse>("Missing refresh token");
+    if(!this.refreshToken){
+      return Result.Fail<AuthorizationResponse>("Missing refresh token");
+    }
     const result = await this.secureService.renewToken(this.refreshToken);
     if(result.DidSucceed){
       this.refreshToken = result.Value.refresh_token;
