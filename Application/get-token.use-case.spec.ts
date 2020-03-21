@@ -1,5 +1,5 @@
 import { GetTokenUseCase } from './get-token.use-case';
-import { Mock, It, Times } from 'moq.ts';
+import { Mock, It } from 'moq.ts';
 import { CacheService } from '../Services/cache.service';
 import { SecureService } from '../Services/secure.service';
 import { AuthorizationResponse } from '../Domain/auth-response';
@@ -32,7 +32,7 @@ describe('GetTokenUseCase', () => {
     secureServiceMock = mockSecureService();
     cacheServiceMock = new Mock<CacheService>();
   })
-  it('should get fresh authorization response', async () => {
+  it('should get authorization response', async () => {
     cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
                     .returns(null)
                     .setup(service => service.setValue(KEYS.ACCESS_TOKEN, It.IsAny<any>()))
