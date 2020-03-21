@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { UseCase } from './use-case.interface';
 import { CounterService } from '../Services/counter.service';
 import { Counter } from '../Domain/counter';
+import { Result } from '../Common/result';
 
 @Injectable()
-export class GetCountersUseCase implements UseCase<Array<Counter>> {
+export class GetCountersUseCase implements UseCase<Result<Counter[]>> {
 
   constructor(private readonly countersService: CounterService){}
   
@@ -15,11 +16,7 @@ export class GetCountersUseCase implements UseCase<Array<Counter>> {
     this.countersService.token = value;
   }
 
-  public async execute(): Promise<Counter[]> {
-    const result = await this.countersService.getCounters();
-    if(result.DidSucceed){
-      return result.Value;
-    }
-    throw new Error(result.ErrorMessage);
+  public async execute(): Promise<Result<Counter[]>> {
+    return await this.countersService.getCounters();
   }
 }

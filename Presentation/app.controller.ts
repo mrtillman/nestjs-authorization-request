@@ -39,7 +39,8 @@ export class AppController {
       this.getTokenUseCase.state = state;
 
       // 4. Access Token (inbound)
-      authResponse = await this.getTokenUseCase.execute();
+      const tokenResult = await this.getTokenUseCase.execute();
+      authResponse = tokenResult.Value;
       this.cache.setValue(KEYS.ACCESS_TOKEN, authResponse);
     }
 
@@ -47,18 +48,18 @@ export class AppController {
     this.getCountersUseCase.token = authResponse.access_token;
 
     // 6. Protected Resource
-    const counters = await this.getCountersUseCase.execute();
+    const countersResult = await this.getCountersUseCase.execute();
 
     this.renewTokenUseCase.refreshToken = authResponse.refresh_token;
 
-    return counters;
+    return countersResult.Value;
   }
 
   @Get("/renewtoken")
   async renewToken(@Response() res: RouteResponse): Promise<any> {
-    var authResponse = await this.renewTokenUseCase.execute();
-    if (authResponse) {
-      res.json(authResponse);
+    var result = await this.renewTokenUseCase.execute();
+    if (result.DidSucceed) {
+      res.json(result.Value);
     } else {
       res.redirect("/");
     }

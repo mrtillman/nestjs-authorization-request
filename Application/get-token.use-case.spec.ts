@@ -35,13 +35,13 @@ describe('GetTokenUseCase', () => {
   it('should get authorization response', async () => {
     cacheServiceMock.setup(service => service.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN))
                     .returns(null)
-                    .setup(service => service.setValue(KEYS.ACCESS_TOKEN, It.IsAny<any>()))
+                    .setup(service => service.setValue(KEYS.ACCESS_TOKEN, It.IsAny()))
                     .returns(null);
     const useCase = getUseCase();
 
     const response = await useCase.execute();
     
-    expect(response).toBeDefined();
+    expect(response.DidSucceed).toBe(true);
     secureServiceMock.verify(service => service.getToken(It.IsAny<string>(), It.IsAny<string>()), called(1));
   })
   it('should get cached authorization response', async () => {
@@ -51,7 +51,7 @@ describe('GetTokenUseCase', () => {
 
     const response = await useCase.execute();
 
-    expect(response).toBeDefined();
+    expect(response.DidSucceed).toBe(true);
     secureServiceMock.verify(service => service.getToken(It.IsAny<string>(), It.IsAny<string>()), called(0));
   })
 })

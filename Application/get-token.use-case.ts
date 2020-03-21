@@ -4,9 +4,10 @@ import { UseCase } from './use-case.interface';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { CacheService } from '../Services/cache.service';
 import { KEYS } from '../Common/keys.enum';
+import { Result } from '../Common/result';
 
 @Injectable()
-export class GetTokenUseCase implements UseCase<AuthorizationResponse> {
+export class GetTokenUseCase implements UseCase<Result<AuthorizationResponse>> {
   
   constructor(private readonly secureService : SecureService,
               private readonly cache : CacheService){ }
@@ -19,17 +20,15 @@ export class GetTokenUseCase implements UseCase<AuthorizationResponse> {
     return this.secureService.authorizationUrl;
   }
 
-  public async execute(): Promise<AuthorizationResponse> {
-    let authResponse: AuthorizationResponse = this.cache.getValue(KEYS.ACCESS_TOKEN);
+  public async execute(): Promise<Result<AuthorizationResponse>> {
+    let authResponse = this.cache.getValue<AuthorizationResponse>(KEYS.ACCESS_TOKEN);
     if(authResponse){
-      return authResponse;
+      return Result.Ok(authResponse);
     }
     const result = await this.secureService.getToken(this.code, this.state);
     if(result.DidSucceed){
-      const authResponse = result.Value;
-      this.cache.setValue(KEYS.ACCESS_TOKEN, authResponse);
-      return authResponse;
+      this.cache.setValue(KEYS.ACCESS_TOKEN, result.Value);
     }
-    throw new Error(result.ErrorMessage);
+    return result;
   }
 }

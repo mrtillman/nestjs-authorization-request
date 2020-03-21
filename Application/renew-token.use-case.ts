@@ -4,9 +4,10 @@ import { UseCase } from './use-case.interface';
 import { AuthorizationResponse } from '../Domain/auth-response';
 import { CacheService } from '../Services/cache.service';
 import { KEYS } from '../Common/keys.enum';
+import { Result } from '../Common/result';
 
 @Injectable()
-export class RenewTokenUseCase implements UseCase<AuthorizationResponse> {
+export class RenewTokenUseCase implements UseCase<Result<AuthorizationResponse>> {
   
   constructor(private readonly secureService : SecureService,
               private readonly cacheService: CacheService) {}
@@ -18,13 +19,12 @@ export class RenewTokenUseCase implements UseCase<AuthorizationResponse> {
     return this.cacheService.getValue(KEYS.REFRESH_TOKEN);
   };
 
-  public async execute(): Promise<AuthorizationResponse> {
-    if(!this.refreshToken) return null;
+  public async execute(): Promise<Result<AuthorizationResponse>> {
+    if(!this.refreshToken) return Result.Fail<AuthorizationResponse>("Missing refresh token");
     const result = await this.secureService.renewToken(this.refreshToken);
     if(result.DidSucceed){
       this.refreshToken = result.Value.refresh_token;
-      return result.Value;
     }
-    throw new Error(result.ErrorMessage);
+    return result;
   }
 }
