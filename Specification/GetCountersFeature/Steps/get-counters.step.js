@@ -13,5 +13,5 @@ When("I request counters", async function() {
 });
 
 Then("I should receive counter data", function() {
-  expect(this.result.length).toBe(3);
+  expect(this.result.value.length).toBe(3);
 });
